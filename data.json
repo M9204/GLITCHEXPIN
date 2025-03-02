@@ -14,5 +14,13 @@
     "source": "mine",
     "notes": "Important ",
     "date": "2025-03-02"
+  },
+  {
+    "type": "expense",
+    "title": "Alwakra to alkhor",
+    "amount": 120,
+    "source": "company",
+    "notes": "",
+    "date": "2025-03-02"
   }
 ]
