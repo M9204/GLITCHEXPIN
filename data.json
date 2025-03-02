@@ -6,5 +6,13 @@
     "source": "mine",
     "notes": "nothing",
     "date": "2025-03-02"
+  },
+  {
+    "type": "income",
+    "title": "Wakra to thumam",
+    "amount": 150,
+    "source": "mine",
+    "notes": "Important ",
+    "date": "2025-03-02"
   }
 ]
