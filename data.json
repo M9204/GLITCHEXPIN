@@ -1,6 +1,14 @@
 [
   {
     "type": "income",
+    "title": "Other",
+    "amount": 900,
+    "source": "others",
+    "notes": "Ramshi",
+    "date": "2025-03-03"
+  },
+  {
+    "type": "income",
     "title": "People money",
     "amount": 100,
     "source": "others",
@@ -9,10 +17,10 @@
   },
   {
     "type": "income",
-    "title": "Manager mony",
-    "amount": 2500,
+    "title": "People money",
+    "amount": 1000,
     "source": "others",
-    "notes": "Shumaizka",
+    "notes": "Shumaizka kuri",
     "date": "2025-03-03"
   }
 ]
