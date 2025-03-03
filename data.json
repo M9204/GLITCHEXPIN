@@ -1,26 +1,18 @@
 [
   {
     "type": "income",
-    "title": "enhanced",
-    "amount": 1500,
-    "source": "mine",
-    "notes": "nothing",
-    "date": "2025-03-02"
+    "title": "People money",
+    "amount": 100,
+    "source": "others",
+    "notes": "Ashir",
+    "date": "2025-03-03"
   },
   {
     "type": "income",
-    "title": "Wakra to thumam",
-    "amount": 150,
-    "source": "mine",
-    "notes": "Important ",
-    "date": "2025-03-02"
-  },
-  {
-    "type": "expense",
-    "title": "Alwakra to alkhor",
-    "amount": 120,
-    "source": "company",
-    "notes": "",
-    "date": "2025-03-02"
+    "title": "Manager mony",
+    "amount": 2500,
+    "source": "others",
+    "notes": "Shumaizka",
+    "date": "2025-03-03"
   }
 ]
