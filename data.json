@@ -54,5 +54,13 @@
     "source": "others",
     "notes": "Cargo master",
     "date": "2025-03-03"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 2500,
+    "source": "others",
+    "notes": "Shumaizka kuri",
+    "date": "2025-03-03"
   }
 ]
