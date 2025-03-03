@@ -22,5 +22,37 @@
     "source": "others",
     "notes": "Shumaizka kuri",
     "date": "2025-03-03"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 580,
+    "source": "others",
+    "notes": "Noufal work balance",
+    "date": "2025-03-03"
+  },
+  {
+    "type": "income",
+    "title": "Sea collection",
+    "amount": 271,
+    "source": "company",
+    "notes": "7173",
+    "date": "2025-02-27"
+  },
+  {
+    "type": "income",
+    "title": "Air collection",
+    "amount": 377,
+    "source": "company",
+    "notes": "7226",
+    "date": "2025-02-27"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 500,
+    "source": "others",
+    "notes": "Cargo master",
+    "date": "2025-03-03"
   }
 ]
