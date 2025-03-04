@@ -5,7 +5,9 @@
     "amount": 900,
     "source": "others",
     "notes": "Ramshi",
-    "date": "2025-03-03"
+    "date": "2025-03-03",
+    "id": "1741083875157",
+    "status": ""
   },
   {
     "type": "income",
@@ -13,7 +15,9 @@
     "amount": 100,
     "source": "others",
     "notes": "Ashir",
-    "date": "2025-03-03"
+    "date": "2025-03-03",
+    "id": "1741083875158",
+    "status": ""
   },
   {
     "type": "income",
@@ -21,7 +25,9 @@
     "amount": 1000,
     "source": "others",
     "notes": "Shumaizka kuri",
-    "date": "2025-03-03"
+    "date": "2025-03-03",
+    "id": "1741083875159",
+    "status": ""
   },
   {
     "type": "income",
@@ -29,23 +35,9 @@
     "amount": 580,
     "source": "others",
     "notes": "Noufal work balance",
-    "date": "2025-03-03"
-  },
-  {
-    "type": "income",
-    "title": "Sea collection",
-    "amount": 271,
-    "source": "company",
-    "notes": "7173",
-    "date": "2025-02-27"
-  },
-  {
-    "type": "income",
-    "title": "Air collection",
-    "amount": 377,
-    "source": "company",
-    "notes": "7226",
-    "date": "2025-02-27"
+    "date": "2025-03-03",
+    "id": "1741083875160",
+    "status": ""
   },
   {
     "type": "income",
@@ -53,7 +45,9 @@
     "amount": 500,
     "source": "others",
     "notes": "Cargo master",
-    "date": "2025-03-03"
+    "date": "2025-03-03",
+    "id": "1741083875161",
+    "status": ""
   },
   {
     "type": "income",
@@ -61,6 +55,28 @@
     "amount": 2500,
     "source": "others",
     "notes": "Shumaizka kuri",
-    "date": "2025-03-03"
+    "date": "2025-03-03",
+    "id": "1741083875162",
+    "status": ""
+  },
+  {
+    "type": "income",
+    "title": "Sea collection",
+    "amount": 271,
+    "source": "company",
+    "notes": "7173",
+    "date": "2025-02-27",
+    "id": "1741083875163",
+    "status": ""
+  },
+  {
+    "type": "income",
+    "title": "Air collection",
+    "amount": 377,
+    "source": "company",
+    "notes": "7226",
+    "date": "2025-02-27",
+    "id": "1741083875164",
+    "status": ""
   }
 ]

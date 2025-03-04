@@ -43,34 +43,40 @@ function setEntryType(type) {
   resetForm();  // Clear the input fields after submitting the entry
 }
 
-function addRowToTable(type, title, amount, source, notes, date) {
+function addRowToTable(type, title, amount, source, notes, date, id, status) {
   const tableBody = document.getElementById('entriesTableBody');
   const row = document.createElement('tr');
+  row.setAttribute('data-id', id); // Store the entry ID in the row for easy lookup
 
   row.innerHTML = `
-    <td><input type="checkbox"></td>
-    <td>${date}</td>
-    <td>${title}</td>
-    <td class="${type === 'income' ? 'green' : 'red'}">$${amount.toFixed(2)}</td>
-    <td>${source}</td>
-    <td>
-      <select class="status-dropdown">
-        <option value="">update status</option>
-        <option value="pending">Pending</option>
-        <option value="done">Done</option>
-      </select>
-    </td>
-    <td>${notes}</td>
+  <td><input type="checkbox"></td>
+  <td>${date}</td>
+  <td>${title}</td>
+  <td class="${type === 'income' ? 'green' : 'red'}">$${amount.toFixed(2)}</td>
+  <td>${source}</td>
+  <td>
+    <select class="status-dropdown">
+      <option value="" ${status === '' ? 'selected' : ''}>-</option>
+      <option value="pending" ${status === 'pending' ? 'selected' : ''}>Pending</option>
+      <option value="done" ${status === 'done' ? 'selected' : ''}>Done</option>
+    </select>
+  </td>
+  <td>${notes}</td>
   `;
 
   const statusDropdown = row.querySelector('.status-dropdown');
   statusDropdown.addEventListener('change', function () {
     const status = statusDropdown.value;
     updateRowBackgroundColor(row, status);
+    saveStatusToServer(id, status);  // Save the updated status to the server
   });
 
   tableBody.appendChild(row);
 
+  // Update the background color based on the current status
+  updateRowBackgroundColor(row, status);
+
+  // Update the totals based on the entry type
   if (type === 'income') {
     totalIncome += amount;
     document.getElementById('totalIncome').textContent = `$${totalIncome.toFixed(2)}`;
@@ -205,16 +211,75 @@ function saveDataToServer(entryData) {
   });
 }
 
-// Load data from server and display it in the table
+
+// Load data from the server and ensure the status is correctly displayed
 function loadData() {
   fetch('/api/data')
     .then(response => response.json())
     .then(data => {
+      console.log("Data loaded from server:", data);  // Log the data to verify it
       data.forEach(entry => {
-        addRowToTable(entry.type, entry.title, entry.amount, entry.source, entry.notes, entry.date);
+        // Add row to table with entry ID and status
+        addRowToTable(entry.type, entry.title, entry.amount, entry.source, entry.notes, entry.date, entry.id, entry.status);
       });
     })
     .catch(error => {
       console.error('Error loading data:', error);
     });
 }
+
+
+
+// Update the status of an entry on the server
+function updateStatusOnServer(row, status) {
+  const title = row.querySelector('td:nth-child(3)').textContent;
+  const date = row.querySelector('td:nth-child(3)').textContent;
+  const amount = parseFloat(row.querySelector('td:nth-child(4)').textContent.replace('$', ''));
+  const source = row.querySelector('td:nth-child(5)').textContent;
+  const notes = row.querySelector('td:nth-child(7)').textContent;
+
+  const updatedData = {
+    title: title,
+    date: date,
+    amount: amount,
+    source: source,
+    notes: notes,
+    status: status
+  };
+
+  fetch('/api/updateStatus', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Status updated successfully:', data);
+  })
+  .catch(error => {
+    console.error('Error updating status:', error);
+  });
+}
+
+function saveStatusToServer(id, status) {
+  fetch(`/api/updateStatus/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ status: status }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Status updated successfully:', data);
+  })
+  .catch(error => {
+    console.error('Error updating status:', error);
+  });
+}
+
+
+
+

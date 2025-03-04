@@ -38,6 +38,9 @@ app.post('/api/data', (req, res) => {
       dataArr = JSON.parse(data);
     }
 
+    // Assign a unique id for the new data (you could generate this in other ways)
+    newData.id = newData.id || Date.now().toString();
+
     // Add new data to the array
     dataArr.push(newData);
 
@@ -51,6 +54,38 @@ app.post('/api/data', (req, res) => {
     });
   });
 });
+
+// Endpoint to update the status of an entry by ID
+app.put('/api/updateStatus/:id', (req, res) => {
+  const updatedStatus = req.body.status;
+  const entryId = req.params.id;
+  
+  // Read current data from the JSON file
+  fs.readFile(dataFilePath, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Error reading data');
+    }
+
+    let dataArr = JSON.parse(data);
+    const entryIndex = dataArr.findIndex(entry => entry.id === entryId);
+    
+    if (entryIndex === -1) {
+      return res.status(404).send('Entry not found');
+    }
+
+    // Update the status of the entry
+    dataArr[entryIndex].status = updatedStatus;
+
+    // Write the updated data back to the file
+    fs.writeFile(dataFilePath, JSON.stringify(dataArr, null, 2), 'utf8', (err) => {
+      if (err) {
+        return res.status(500).send('Error writing data');
+      }
+      res.status(200).send('Status updated successfully');
+    });
+  });
+});
+
 
 // Serve the index.html page
 app.get('/', (req, res) => {
