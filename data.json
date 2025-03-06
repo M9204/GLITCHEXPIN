@@ -97,5 +97,68 @@
     "notes": "Cartoon and pallet delivery",
     "date": "2025-03-06",
     "id": "1741262964499"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 20,
+    "source": "company",
+    "notes": "",
+    "date": "2025-02-03",
+    "id": "1741264714607"
+  },
+  {
+    "type": "expense",
+    "title": "Typing center",
+    "amount": 30,
+    "source": "company",
+    "notes": "",
+    "date": "2025-02-04",
+    "id": "1741264836428"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 100,
+    "source": "company",
+    "notes": "587431 mitspishi",
+    "date": "2025-02-05",
+    "id": "1741265012794"
+  },
+  {
+    "type": "expense",
+    "title": "Termocall ",
+    "amount": 20,
+    "source": "company",
+    "notes": "",
+    "date": "2025-02-06",
+    "id": "1741265067093"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "35891   nissan",
+    "date": "2025-02-06",
+    "id": "1741265168406"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Van",
+    "date": "2025-02-06",
+    "id": "1741265243196"
+  },
+  {
+    "type": "expense",
+    "title": "Oil change",
+    "amount": 110,
+    "source": "company",
+    "notes": "Nissan p",
+    "date": "2025-02-09",
+    "id": "1741265292598"
   }
 ]
