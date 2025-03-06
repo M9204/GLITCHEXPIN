@@ -160,5 +160,59 @@
     "notes": "Nissan p",
     "date": "2025-02-09",
     "id": "1741265292598"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "468422  nissan",
+    "date": "2025-02-09",
+    "id": "1741265534361"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "12771 van",
+    "date": "2025-02-12",
+    "id": "1741265702402"
+  },
+  {
+    "type": "expense",
+    "title": "Bubble",
+    "amount": 120,
+    "source": "",
+    "notes": "",
+    "date": "2025-02-14",
+    "id": "1741265819599"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing ",
+    "amount": 49,
+    "source": "company",
+    "notes": "Home city",
+    "date": "2025-02-14",
+    "id": "1741265884492"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "12178  van",
+    "date": "2025-02-15",
+    "id": "1741265932646"
+  },
+  {
+    "type": "expense",
+    "title": "Oil change",
+    "amount": 180,
+    "source": "company",
+    "notes": "Urvan van",
+    "date": "2025-03-06",
+    "id": "1741265976005"
   }
 ]
