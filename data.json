@@ -78,5 +78,24 @@
     "date": "2025-02-27",
     "id": "1741083875164",
     "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "7233",
+    "amount": 167,
+    "source": "company",
+    "notes": "Sea cargo",
+    "date": "2025-03-03",
+    "id": "1741262806896",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "Receipt",
+    "amount": 465,
+    "source": "company",
+    "notes": "Cartoon and pallet delivery",
+    "date": "2025-03-06",
+    "id": "1741262964499"
   }
 ]
