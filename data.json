@@ -277,5 +277,32 @@
     "notes": "924128  nissan p",
     "date": "2025-02-27",
     "id": "1741421368351"
+  },
+  {
+    "type": "expense",
+    "title": "Quiver",
+    "amount": 225,
+    "source": "company",
+    "notes": "Telescope 20 feet",
+    "date": "2025-02-11",
+    "id": "1741423613898"
+  },
+  {
+    "type": "expense",
+    "title": "Quiver",
+    "amount": 275,
+    "source": "company",
+    "notes": "Telescope 40 feet",
+    "date": "2025-02-12",
+    "id": "1741423670743"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 60,
+    "source": "company",
+    "notes": "Belt and ramba",
+    "date": "2025-02-17",
+    "id": "1741423818272"
   }
 ]
