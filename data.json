@@ -17,7 +17,7 @@
     "notes": "Ashir",
     "date": "2025-03-03",
     "id": "1741083875158",
-    "status": "pending"
+    "status": "done"
   },
   {
     "type": "income",
@@ -313,5 +313,14 @@
     "notes": "Telescope 40 f",
     "date": "2025-02-22",
     "id": "1741424007221"
+  },
+  {
+    "type": "expense",
+    "title": "Kafeel house",
+    "amount": 700,
+    "source": "company",
+    "notes": "Telescope 40 and 20 feet",
+    "date": "2025-02-16",
+    "id": "1741432527313"
   }
 ]
