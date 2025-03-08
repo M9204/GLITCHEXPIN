@@ -304,5 +304,14 @@
     "notes": "Belt and ramba",
     "date": "2025-02-17",
     "id": "1741423818272"
+  },
+  {
+    "type": "expense",
+    "title": "Quiver",
+    "amount": 300,
+    "source": "company",
+    "notes": "Telescope 40 f",
+    "date": "2025-02-22",
+    "id": "1741424007221"
   }
 ]
