@@ -232,5 +232,50 @@
     "notes": "91762  nissan p",
     "date": "2025-02-19",
     "id": "1741420979251"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "24128   nissan p",
+    "date": "2025-02-20",
+    "id": "1741421075213"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 30,
+    "source": "company",
+    "notes": "20917  nissan p",
+    "date": "2025-02-21",
+    "id": "1741421137199"
+  },
+  {
+    "type": "expense",
+    "title": "Wooden box",
+    "amount": 139,
+    "source": "company",
+    "notes": "Home city ",
+    "date": "2025-02-24",
+    "id": "1741421203398"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 35,
+    "source": "company",
+    "notes": "464609  van",
+    "date": "2025-02-24",
+    "id": "1741421298301"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "924128  nissan p",
+    "date": "2025-02-27",
+    "id": "1741421368351"
   }
 ]
