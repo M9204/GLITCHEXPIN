@@ -212,7 +212,25 @@
     "amount": 180,
     "source": "company",
     "notes": "Urvan van",
-    "date": "2025-03-06",
+    "date": "2025-02-16",
     "id": "1741265976005"
+  },
+  {
+    "type": "income",
+    "title": "1846",
+    "amount": 155,
+    "source": "company",
+    "notes": "Courier india",
+    "date": "2025-03-06",
+    "id": "1741420544541"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 80,
+    "source": "company",
+    "notes": "91762  nissan p",
+    "date": "2025-02-19",
+    "id": "1741420979251"
   }
 ]
