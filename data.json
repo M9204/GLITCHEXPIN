@@ -96,7 +96,8 @@
     "source": "company",
     "notes": "Cartoon and pallet delivery",
     "date": "2025-03-06",
-    "id": "1741262964499"
+    "id": "1741262964499",
+    "status": "pending"
   },
   {
     "type": "expense",
@@ -322,5 +323,15 @@
     "notes": "Telescope 40 and 20 feet",
     "date": "2025-02-16",
     "id": "1741432527313"
+  },
+  {
+    "type": "expense",
+    "title": "Ashir",
+    "amount": 100,
+    "source": "mine",
+    "notes": "Give to ashir",
+    "date": "2025-03-08",
+    "id": "1741433154316",
+    "status": "done"
   }
 ]
