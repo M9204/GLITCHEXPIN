@@ -378,5 +378,41 @@
     "notes": "419551 nissan p",
     "date": "2025-03-09",
     "id": "1741522768398"
+  },
+  {
+    "type": "expense",
+    "title": "Packing meterial",
+    "amount": 100,
+    "source": "company",
+    "notes": "Bubble roll",
+    "date": "2025-03-04",
+    "id": "1741522941403"
+  },
+  {
+    "type": "expense",
+    "title": "Packing meterial",
+    "amount": 360,
+    "source": "company",
+    "notes": "Bubble and cartoon clothes",
+    "date": "2025-03-01",
+    "id": "1741523031093"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 30,
+    "source": "company",
+    "notes": "Home city",
+    "date": "2025-03-05",
+    "id": "1741523085003"
+  },
+  {
+    "type": "expense",
+    "title": "Home city",
+    "amount": 20,
+    "source": "company",
+    "notes": "",
+    "date": "2025-03-06",
+    "id": "1741523116423"
   }
 ]
