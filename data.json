@@ -333,5 +333,50 @@
     "date": "2025-03-08",
     "id": "1741433154316",
     "status": "done"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "150210   nissan p",
+    "date": "2025-02-28",
+    "id": "1741522559726"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "784205   van",
+    "date": "2025-03-05",
+    "id": "1741522649797"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "35302 nissan p",
+    "date": "2025-03-06",
+    "id": "1741522689394"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "26870 van",
+    "date": "2025-03-07",
+    "id": "1741522728994"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "419551 nissan p",
+    "date": "2025-03-09",
+    "id": "1741522768398"
   }
 ]
