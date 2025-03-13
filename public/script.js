@@ -162,18 +162,48 @@ function deleteAllEntries() {
 }
 
 function exportToExcel() {
-  const table = document.querySelector("table");
-  const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
-  const excelFile = XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+  const tableRows = document.querySelectorAll("#entriesTableBody tr");
 
-  const blob = new Blob([s2ab(excelFile)], { type: "application/octet-stream" });
+  let incomeData = [["Date", "Title", "Amount", "Source", "Notes"]];
+  let expenseData = [["Date", "Title", "Amount", "Source", "Notes"]];
 
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "expense_income_tracker.xlsx";
+  tableRows.forEach(row => {
+    const columns = row.querySelectorAll("td");
+    const date = columns[1].textContent;
+    const title = columns[2].textContent;
+    const amount = parseFloat(columns[3].textContent.replace("$", ""));
+    const source = columns[4].textContent;
+    const notes = columns[6].textContent;
 
-  link.click();
+    if (columns[3].classList.contains("green")) {
+      incomeData.push([date, title, amount, source, notes]); // Income entry
+    } else {
+      expenseData.push([date, title, amount, source, notes]); // Expense entry
+    }
+  });
+
+  // Creating a sheet for totals
+  let totalData = [
+    ["Category", "Amount"],
+    ["Total Income", totalIncome.toFixed(2)],
+    ["Total Expenses", totalExpenses.toFixed(2)],
+    ["Net Total", (totalIncome - totalExpenses).toFixed(2)]
+  ];
+
+  // Create workbook and add sheets
+  let wb = XLSX.utils.book_new();
+  let wsIncome = XLSX.utils.aoa_to_sheet(incomeData);
+  let wsExpense = XLSX.utils.aoa_to_sheet(expenseData);
+  let wsTotal = XLSX.utils.aoa_to_sheet(totalData);
+
+  XLSX.utils.book_append_sheet(wb, wsIncome, "Income");
+  XLSX.utils.book_append_sheet(wb, wsExpense, "Expenses");
+  XLSX.utils.book_append_sheet(wb, wsTotal, "Total Summary");
+
+  // Write the workbook and trigger download
+  XLSX.writeFile(wb, "income_expense_report.xlsx");
 }
+
 
 function s2ab(str) {
   const buf = new ArrayBuffer(str.length);
