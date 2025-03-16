@@ -423,5 +423,14 @@
     "notes": "Sea cargo",
     "date": "2025-02-20",
     "id": "1741524400897"
+  },
+  {
+    "type": "expense",
+    "title": "Lug job",
+    "amount": 90,
+    "source": "company",
+    "notes": "9 pallets",
+    "date": "2025-03-16",
+    "id": "1742147317008"
   }
 ]
