@@ -432,5 +432,14 @@
     "notes": "9 pallets",
     "date": "2025-03-16",
     "id": "1742147317008"
+  },
+  {
+    "type": "expense",
+    "title": "Abubsamrah job",
+    "amount": 200,
+    "source": "company",
+    "notes": "4 labors pacha",
+    "date": "2025-03-15",
+    "id": "1742204477588"
   }
 ]
