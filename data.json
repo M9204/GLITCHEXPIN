@@ -422,7 +422,8 @@
     "source": "company",
     "notes": "Sea cargo",
     "date": "2025-02-20",
-    "id": "1741524400897"
+    "id": "1741524400897",
+    "status": "pending"
   },
   {
     "type": "expense",
@@ -441,5 +442,23 @@
     "notes": "4 labors pacha",
     "date": "2025-03-15",
     "id": "1742204477588"
+  },
+  {
+    "type": "income",
+    "title": "People",
+    "amount": 100,
+    "source": "others",
+    "notes": "Shumaizka",
+    "date": "2025-03-26",
+    "id": "1742988684602"
+  },
+  {
+    "type": "income",
+    "title": "7265",
+    "amount": 610,
+    "source": "company",
+    "notes": "Sea collection",
+    "date": "2025-03-22",
+    "id": "1742988880506"
   }
 ]
