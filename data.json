@@ -514,5 +514,23 @@
     "notes": "Only make pallet",
     "date": "2025-03-12",
     "id": "1744041609792"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 30,
+    "source": "company",
+    "notes": "",
+    "date": "2025-03-05",
+    "id": "1744042255310"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 20,
+    "source": "company",
+    "notes": "Film roll",
+    "date": "2025-03-06",
+    "id": "1744042321201"
   }
 ]
