@@ -604,5 +604,32 @@
     "notes": "Self moter change",
     "date": "2025-04-03",
     "id": "1744043015501"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "4547614",
+    "date": "2025-03-24",
+    "id": "1744043144200"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 90,
+    "source": "company",
+    "notes": "Mitsubishi silin pump",
+    "date": "2025-04-01",
+    "id": "1744043211305"
+  },
+  {
+    "type": "expense",
+    "title": "Peteol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Nissan pickup silin pump",
+    "date": "2025-04-03",
+    "id": "1744043273925"
   }
 ]
