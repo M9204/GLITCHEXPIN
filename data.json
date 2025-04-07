@@ -532,5 +532,77 @@
     "notes": "Film roll",
     "date": "2025-03-06",
     "id": "1744042321201"
+  },
+  {
+    "type": "expense",
+    "title": "Lashing items",
+    "amount": 15,
+    "source": "company",
+    "notes": "Cargo master ",
+    "date": "2025-03-19",
+    "id": "1744042424578"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 70,
+    "source": "company",
+    "notes": "Film roll",
+    "date": "2025-03-03",
+    "id": "1744042570147"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 22,
+    "source": "company",
+    "notes": "Night work move five",
+    "date": "2025-03-27",
+    "id": "1744042676911"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 4,
+    "source": "company",
+    "notes": "Move five job",
+    "date": "2025-03-23",
+    "id": "1744042730709"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 100,
+    "source": "company",
+    "notes": "Film roll",
+    "date": "2025-03-27",
+    "id": "1744042763609"
+  },
+  {
+    "type": "expense",
+    "title": "Typing senter",
+    "amount": 10,
+    "source": "company",
+    "notes": "Gate pass leter",
+    "date": "2025-03-25",
+    "id": "1744042820085"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 51,
+    "source": "company",
+    "notes": "",
+    "date": "2025-03-28",
+    "id": "1744042859904"
+  },
+  {
+    "type": "expense",
+    "title": "189727",
+    "amount": 400,
+    "source": "company",
+    "notes": "Self moter change",
+    "date": "2025-04-03",
+    "id": "1744043015501"
   }
 ]
