@@ -631,5 +631,122 @@
     "notes": "Nissan pickup silin pump",
     "date": "2025-04-03",
     "id": "1744043273925"
+  },
+  {
+    "type": "income",
+    "title": "7255",
+    "amount": 291,
+    "source": "company",
+    "notes": "Sea cargo",
+    "date": "2025-03-13",
+    "id": "1744114967333"
+  },
+  {
+    "type": "income",
+    "title": "7256",
+    "amount": 2065,
+    "source": "company",
+    "notes": "Air ub",
+    "date": "2025-03-15",
+    "id": "1744115008712"
+  },
+  {
+    "type": "income",
+    "title": "7261",
+    "amount": 185,
+    "source": "company",
+    "notes": "Sea balance paid",
+    "date": "2025-04-08",
+    "id": "1744115057342"
+  },
+  {
+    "type": "income",
+    "title": "7286",
+    "amount": 560,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-04-03",
+    "id": "1744115097016"
+  },
+  {
+    "type": "income",
+    "title": "7282",
+    "amount": 280,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-04-01",
+    "id": "1744115144302"
+  },
+  {
+    "type": "income",
+    "title": "7279",
+    "amount": 210,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-03-27",
+    "id": "1744115196199"
+  },
+  {
+    "type": "income",
+    "title": "7265",
+    "amount": 610,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-03-22",
+    "id": "1744115238009"
+  },
+  {
+    "type": "income",
+    "title": "7264",
+    "amount": 310,
+    "source": "company",
+    "notes": "Air ind",
+    "date": "2025-03-20",
+    "id": "1744115283367"
+  },
+  {
+    "type": "income",
+    "title": "7269",
+    "amount": 385,
+    "source": "company",
+    "notes": "Air exp ind",
+    "date": "2025-03-22",
+    "id": "1744115325529"
+  },
+  {
+    "type": "income",
+    "title": "7287",
+    "amount": 483,
+    "source": "company",
+    "notes": "Air ub",
+    "date": "2025-04-03",
+    "id": "1744115403699"
+  },
+  {
+    "type": "income",
+    "title": "7285",
+    "amount": 230,
+    "source": "company",
+    "notes": "Air ub",
+    "date": "2025-04-03",
+    "id": "1744115432401"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 100,
+    "source": "others",
+    "notes": "Cbq",
+    "date": "2025-04-08",
+    "id": "1744115486027"
+  },
+  {
+    "type": "expense",
+    "title": "Thambi",
+    "amount": 200,
+    "source": "others",
+    "notes": "Salary advance",
+    "date": "2025-04-08",
+    "id": "1744115571739"
   }
 ]
