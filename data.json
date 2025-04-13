@@ -748,5 +748,14 @@
     "notes": "Salary advance",
     "date": "2025-04-08",
     "id": "1744115571739"
+  },
+  {
+    "type": "expense",
+    "title": "Dubai truck",
+    "amount": 1000,
+    "source": "company",
+    "notes": "3 ton pickup",
+    "date": "2025-04-13",
+    "id": "1744545474583"
   }
 ]
