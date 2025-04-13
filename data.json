@@ -829,5 +829,41 @@
     "notes": "26677 - export car",
     "date": "2025-04-09",
     "id": "1744546250373"
+  },
+  {
+    "type": "expense",
+    "title": "altalb wooden packing",
+    "amount": 570,
+    "source": "company",
+    "notes": "playwood 10 pc",
+    "date": "2025-04-08",
+    "id": "1744546464281"
+  },
+  {
+    "type": "expense",
+    "title": "Sidy car lashing",
+    "amount": 36,
+    "source": "company",
+    "notes": "Belt and nile",
+    "date": "2025-04-09",
+    "id": "1744546636668"
+  },
+  {
+    "type": "expense",
+    "title": "Sidy car lashing",
+    "amount": 110,
+    "source": "company",
+    "notes": "70 ramba, 20 food, 20 belt",
+    "date": "2025-04-09",
+    "id": "1744546738067"
+  },
+  {
+    "type": "expense",
+    "title": "Al talib woodem box",
+    "amount": 15,
+    "source": "company",
+    "notes": "Black screw ",
+    "date": "2025-04-09",
+    "id": "1744546872454"
   }
 ]
