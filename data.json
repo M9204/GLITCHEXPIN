@@ -757,5 +757,77 @@
     "notes": "3 ton pickup",
     "date": "2025-04-13",
     "id": "1744545474583"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "72629",
+    "date": "2025-03-11",
+    "id": "1744546060967"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "0588",
+    "date": "2025-03-17",
+    "id": "1744546087367"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 70,
+    "source": "company",
+    "notes": "60358",
+    "date": "2025-03-20",
+    "id": "1744546112468"
+  },
+  {
+    "type": "expense",
+    "title": "petrol - desiel",
+    "amount": 100,
+    "source": "company",
+    "notes": "18107",
+    "date": "2025-04-20",
+    "id": "1744546143472"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "17547",
+    "date": "2025-03-23",
+    "id": "1744546173468"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 21,
+    "source": "company",
+    "notes": "4134",
+    "date": "2025-03-26",
+    "id": "1744546196075"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "0549",
+    "date": "2025-03-28",
+    "id": "1744546214472"
+  },
+  {
+    "type": "expense",
+    "title": "petrol - diesel",
+    "amount": 30,
+    "source": "company",
+    "notes": "26677 - export car",
+    "date": "2025-04-09",
+    "id": "1744546250373"
   }
 ]
