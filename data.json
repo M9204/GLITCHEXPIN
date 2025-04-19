@@ -16,5 +16,50 @@
     "notes": "588971 ",
     "date": "2025-04-15",
     "id": "1745076226998"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing and personal effects",
+    "amount": 49,
+    "source": "company",
+    "notes": "Lebanan customer",
+    "date": "2025-04-17",
+    "id": "1745077040580"
+  },
+  {
+    "type": "expense",
+    "title": "Car wash",
+    "amount": 25,
+    "source": "company",
+    "notes": "Nissan pickup",
+    "date": "2025-04-17",
+    "id": "1745077107478"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Urvan 595346",
+    "date": "2025-04-19",
+    "id": "1745077161416"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 100,
+    "source": "company",
+    "notes": "565597 mistubishi",
+    "date": "2025-04-14",
+    "id": "1745077250286"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "001101",
+    "date": "2025-04-17",
+    "id": "1745077355978"
   }
 ]
