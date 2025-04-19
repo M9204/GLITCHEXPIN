@@ -1,3 +1,20 @@
 [
-  
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "584576",
+    "date": "2025-04-13",
+    "id": "1745076175198"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 80,
+    "source": "company",
+    "notes": "588971 ",
+    "date": "2025-04-15",
+    "id": "1745076226998"
+  }
 ]
