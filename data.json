@@ -97,5 +97,86 @@
     "notes": "Tv moving",
     "date": "2025-04-23",
     "id": "1745495305550"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 1000,
+    "source": "company",
+    "notes": "Cba bank",
+    "date": "2025-04-20",
+    "id": "1745505293470"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 850,
+    "source": "company",
+    "notes": "Cbq bank",
+    "date": "2025-04-21",
+    "id": "1745505335756"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 200,
+    "source": "company",
+    "notes": "Cba Bank",
+    "date": "2025-04-22",
+    "id": "1745505360558"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 750,
+    "source": "company",
+    "notes": "Cba Bank",
+    "date": "2025-04-23",
+    "id": "1745505391152"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 776,
+    "source": "company",
+    "notes": "Home city 70821",
+    "date": "2025-04-20",
+    "id": "1745505561273"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 505,
+    "source": "company",
+    "notes": "Home city 71848",
+    "date": "2025-04-21",
+    "id": "1745505606557"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 100,
+    "source": "company",
+    "notes": "Hope city 86907",
+    "date": "2025-04-21",
+    "id": "1745505670748"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 200,
+    "source": "company",
+    "notes": "236214 refa",
+    "date": "2025-04-21",
+    "id": "1745505722552"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 80,
+    "source": "company",
+    "notes": "Solar 488127",
+    "date": "2025-04-21",
+    "id": "1745505794758"
   }
 ]
