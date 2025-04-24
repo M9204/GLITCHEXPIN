@@ -178,5 +178,41 @@
     "notes": "Solar 488127",
     "date": "2025-04-21",
     "id": "1745505794758"
+  },
+  {
+    "type": "expense",
+    "title": "Sam & jetli ",
+    "amount": 138,
+    "source": "company",
+    "notes": "Zain 70209",
+    "date": "2025-04-23",
+    "id": "1745505897124"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 230,
+    "source": "company",
+    "notes": "Zain 70322",
+    "date": "2025-04-23",
+    "id": "1745505979663"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 130,
+    "source": "company",
+    "notes": "Home city 69151",
+    "date": "2025-04-23",
+    "id": "1745506015162"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Van 487746",
+    "date": "2025-04-24",
+    "id": "1745506063056"
   }
 ]
