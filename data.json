@@ -214,5 +214,23 @@
     "notes": "Van 487746",
     "date": "2025-04-24",
     "id": "1745506063056"
+  },
+  {
+    "type": "expense",
+    "title": "Qbh 2 machine lashing",
+    "amount": 450,
+    "source": "company",
+    "notes": "7 ten forklift",
+    "date": "2025-04-23",
+    "id": "1746004039985"
+  },
+  {
+    "type": "expense",
+    "title": "Qbh 2 machine lashing",
+    "amount": 200,
+    "source": "company",
+    "notes": "2 labor",
+    "date": "2025-04-23",
+    "id": "1746004078678"
   }
 ]
