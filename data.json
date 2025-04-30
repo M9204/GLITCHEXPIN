@@ -232,5 +232,14 @@
     "notes": "2 labor",
     "date": "2025-04-23",
     "id": "1746004078678"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 50,
+    "source": "company",
+    "notes": "Nissan pickup 82888",
+    "date": "2025-04-28",
+    "id": "1746004233860"
   }
 ]
