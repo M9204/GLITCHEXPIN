@@ -1,0 +1,29 @@
+[
+  {
+    "type": "expense",
+    "title": "Car lashing ",
+    "amount": 100,
+    "source": "company",
+    "notes": "Breakdown",
+    "date": "2025-05-11",
+    "id": "1746984726776"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 25,
+    "source": "company",
+    "notes": "3 belts",
+    "date": "2025-05-11",
+    "id": "1746984776826"
+  },
+  {
+    "type": "expense",
+    "title": "Re export air shipment",
+    "amount": 100,
+    "source": "company",
+    "notes": "50+50 customs charge",
+    "date": "2025-05-11",
+    "id": "1746984854724"
+  }
+]
