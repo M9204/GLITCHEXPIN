@@ -25,5 +25,14 @@
     "notes": "50+50 customs charge",
     "date": "2025-05-11",
     "id": "1746984854724"
+  },
+  {
+    "type": "expense",
+    "title": "Gwc packing lusail",
+    "amount": 60,
+    "source": "company",
+    "notes": "Taxi\n40 lusail to doha\n20 doha to wakrah",
+    "date": "2025-05-11",
+    "id": "1747074216293"
   }
 ]
