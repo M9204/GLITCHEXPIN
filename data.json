@@ -34,5 +34,14 @@
     "notes": "Taxi\n40 lusail to doha\n20 doha to wakrah",
     "date": "2025-05-11",
     "id": "1747074216293"
+  },
+  {
+    "type": "expense",
+    "title": "Old room",
+    "amount": 940,
+    "source": "company",
+    "notes": "590 karama\n350 maintains",
+    "date": "2025-05-13",
+    "id": "1747157047399"
   }
 ]
