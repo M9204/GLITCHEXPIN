@@ -151,5 +151,32 @@
     "notes": "Food",
     "date": "2025-05-01",
     "id": "1747316512353"
+  },
+  {
+    "type": "expense",
+    "title": "Lug work",
+    "amount": 181,
+    "source": "company",
+    "notes": "Home city 76243",
+    "date": "2025-05-01",
+    "id": "1747317042864"
+  },
+  {
+    "type": "expense",
+    "title": "Gwc work moving job",
+    "amount": 7,
+    "source": "company",
+    "notes": "6mm bit",
+    "date": "2025-05-05",
+    "id": "1747317135999"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 25,
+    "source": "company",
+    "notes": "Murabba, nail home city 981",
+    "date": "2025-05-11",
+    "id": "1747317268355"
   }
 ]
