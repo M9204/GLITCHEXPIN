@@ -178,5 +178,32 @@
     "notes": "Murabba, nail home city 981",
     "date": "2025-05-11",
     "id": "1747317268355"
+  },
+  {
+    "type": "expense",
+    "title": "Gwc job packing 30 cbm",
+    "amount": 70,
+    "source": "company",
+    "notes": "7 person",
+    "date": "2025-05-11",
+    "id": "1747317582956"
+  },
+  {
+    "type": "expense",
+    "title": "Nissan pickup",
+    "amount": 8,
+    "source": "company",
+    "notes": "Brake oil",
+    "date": "2025-05-13",
+    "id": "1747317621672"
+  },
+  {
+    "type": "expense",
+    "title": "Link shipping",
+    "amount": 40,
+    "source": "company",
+    "notes": "Packing politing cover\nHome city 5745",
+    "date": "2025-05-14",
+    "id": "1747317694671"
   }
 ]
