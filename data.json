@@ -52,5 +52,59 @@
     "notes": "Super express local moving",
     "date": "2025-05-01",
     "id": "1747308893059"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 60,
+    "source": "company",
+    "notes": "44009",
+    "date": "2025-04-30",
+    "id": "1747311411582"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "86192",
+    "date": "2025-04-30",
+    "id": "1747311621856"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "08716",
+    "date": "2025-05-01",
+    "id": "1747311960157"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "08695",
+    "date": "2025-05-04",
+    "id": "1747312011059"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "86910",
+    "date": "2025-05-05",
+    "id": "1747312070155"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "57097",
+    "date": "2025-05-08",
+    "id": "1747312098656"
   }
 ]
