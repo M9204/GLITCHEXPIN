@@ -115,5 +115,41 @@
     "notes": "30429",
     "date": "2025-05-12",
     "id": "1747312137063"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 27,
+    "source": "company",
+    "notes": "Murabba & nail",
+    "date": "2025-04-30",
+    "id": "1747316241068"
+  },
+  {
+    "type": "expense",
+    "title": "Food gwc packing 30 cbm",
+    "amount": 60,
+    "source": "company",
+    "notes": "Food",
+    "date": "2025-05-12",
+    "id": "1747316366785"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 72,
+    "source": "company",
+    "notes": "Food",
+    "date": "2025-05-01",
+    "id": "1747316410556"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 24,
+    "source": "company",
+    "notes": "Food",
+    "date": "2025-05-01",
+    "id": "1747316512353"
   }
 ]
