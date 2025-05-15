@@ -43,5 +43,14 @@
     "notes": "590 karama\n350 maintains",
     "date": "2025-05-13",
     "id": "1747157047399"
+  },
+  {
+    "type": "income",
+    "title": "Local moving",
+    "amount": 2000,
+    "source": "company",
+    "notes": "Super express local moving",
+    "date": "2025-05-01",
+    "id": "1747308893059"
   }
 ]
