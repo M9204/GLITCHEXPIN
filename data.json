@@ -205,5 +205,41 @@
     "notes": "Packing politing cover\nHome city 5745",
     "date": "2025-05-14",
     "id": "1747317694671"
+  },
+  {
+    "type": "income",
+    "title": "Ashir",
+    "amount": 300,
+    "source": "company",
+    "notes": "Car lashing, petrol",
+    "date": "2025-04-30",
+    "id": "1747477452206"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 240,
+    "source": "company",
+    "notes": "4 car lashing",
+    "date": "2025-04-30",
+    "id": "1747477532185"
+  },
+  {
+    "type": "expense",
+    "title": "Labor room commission",
+    "amount": 240,
+    "source": "company",
+    "notes": "Company staff room",
+    "date": "2025-04-26",
+    "id": "1747477641988"
+  },
+  {
+    "type": "expense",
+    "title": "My room rend",
+    "amount": 400,
+    "source": "company",
+    "notes": "Rithu room",
+    "date": "2025-05-01",
+    "id": "1747477677155"
   }
 ]
