@@ -241,5 +241,23 @@
     "notes": "Rithu room",
     "date": "2025-05-01",
     "id": "1747477677155"
+  },
+  {
+    "type": "expense",
+    "title": "Old room rend balance",
+    "amount": 940,
+    "source": "company",
+    "notes": "590 karama, 350 maintenance",
+    "date": "2025-05-10",
+    "id": "1747477804811"
+  },
+  {
+    "type": "expense",
+    "title": "Taiter",
+    "amount": 540,
+    "source": "company",
+    "notes": "Home city makita taiter",
+    "date": "2025-05-05",
+    "id": "1747478198992"
   }
 ]
