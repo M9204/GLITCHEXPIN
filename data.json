@@ -866,9 +866,6 @@
     "date": "2025-04-09",
     "id": "1744546872454"
   },
-  
-  
-  
   {
     "type": "expense",
     "title": "Petrol",
@@ -1112,10 +1109,6 @@
     "date": "2025-04-28",
     "id": "1746004233860"
   },
-  
-  
-  
-
   {
     "type": "expense",
     "title": "Car lashing ",
@@ -1457,6 +1450,32 @@
     "notes": "Nissan 3655071",
     "date": "2025-05-20",
     "id": "1747735575418"
+  },
+  {
+    "type": "income",
+    "title": "6374",
+    "amount": 300,
+    "source": "company",
+    "notes": "",
+    "date": "2025-04-13",
+    "id": "1747751963191"
+  },
+  {
+    "type": "income",
+    "title": "air clearance",
+    "amount": 110,
+    "source": "company",
+    "notes": "ali alfadla",
+    "date": "2025-02-12",
+    "id": "1747752029819"
+  },
+  {
+    "type": "income",
+    "title": "Faisl",
+    "amount": 620,
+    "source": "company",
+    "notes": "given by hand",
+    "date": "2025-05-20",
+    "id": "1747752079035"
   }
 ]
-  
