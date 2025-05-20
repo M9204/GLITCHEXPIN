@@ -1,5 +1,1122 @@
 [
   {
+    "type": "income",
+    "title": "Other",
+    "amount": 900,
+    "source": "others",
+    "notes": "Ramshi",
+    "date": "2025-03-03",
+    "id": "1741083875157",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 100,
+    "source": "others",
+    "notes": "Ashir",
+    "date": "2025-03-03",
+    "id": "1741083875158",
+    "status": "done"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 1000,
+    "source": "others",
+    "notes": "Shumaizka kuri",
+    "date": "2025-03-03",
+    "id": "1741083875159",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 580,
+    "source": "others",
+    "notes": "Noufal work balance",
+    "date": "2025-03-03",
+    "id": "1741083875160",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 500,
+    "source": "others",
+    "notes": "Cargo master",
+    "date": "2025-03-03",
+    "id": "1741083875161",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "People money",
+    "amount": 2500,
+    "source": "others",
+    "notes": "Shumaizka kuri",
+    "date": "2025-03-03",
+    "id": "1741083875162",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "Sea collection",
+    "amount": 271,
+    "source": "company",
+    "notes": "7173",
+    "date": "2025-02-27",
+    "id": "1741083875163",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "Air collection",
+    "amount": 377,
+    "source": "company",
+    "notes": "7226",
+    "date": "2025-02-27",
+    "id": "1741083875164",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "7233",
+    "amount": 167,
+    "source": "company",
+    "notes": "Sea cargo",
+    "date": "2025-03-03",
+    "id": "1741262806896",
+    "status": "pending"
+  },
+  {
+    "type": "income",
+    "title": "Receipt",
+    "amount": 465,
+    "source": "company",
+    "notes": "Cartoon and pallet delivery",
+    "date": "2025-03-06",
+    "id": "1741262964499",
+    "status": "pending"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 20,
+    "source": "company",
+    "notes": "",
+    "date": "2025-02-03",
+    "id": "1741264714607"
+  },
+  {
+    "type": "expense",
+    "title": "Typing center",
+    "amount": 30,
+    "source": "company",
+    "notes": "",
+    "date": "2025-02-04",
+    "id": "1741264836428"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 100,
+    "source": "company",
+    "notes": "587431 mitspishi",
+    "date": "2025-02-05",
+    "id": "1741265012794"
+  },
+  {
+    "type": "expense",
+    "title": "Termocall ",
+    "amount": 20,
+    "source": "company",
+    "notes": "",
+    "date": "2025-02-06",
+    "id": "1741265067093"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "35891   nissan",
+    "date": "2025-02-06",
+    "id": "1741265168406"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Van",
+    "date": "2025-02-06",
+    "id": "1741265243196"
+  },
+  {
+    "type": "expense",
+    "title": "Oil change",
+    "amount": 110,
+    "source": "company",
+    "notes": "Nissan p",
+    "date": "2025-02-09",
+    "id": "1741265292598"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "468422  nissan",
+    "date": "2025-02-09",
+    "id": "1741265534361"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "12771 van",
+    "date": "2025-02-12",
+    "id": "1741265702402"
+  },
+  {
+    "type": "expense",
+    "title": "Bubble",
+    "amount": 120,
+    "source": "",
+    "notes": "",
+    "date": "2025-02-14",
+    "id": "1741265819599"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing ",
+    "amount": 49,
+    "source": "company",
+    "notes": "Home city",
+    "date": "2025-02-14",
+    "id": "1741265884492"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "12178  van",
+    "date": "2025-02-15",
+    "id": "1741265932646"
+  },
+  {
+    "type": "expense",
+    "title": "Oil change",
+    "amount": 180,
+    "source": "company",
+    "notes": "Urvan van",
+    "date": "2025-02-16",
+    "id": "1741265976005"
+  },
+  {
+    "type": "income",
+    "title": "1846",
+    "amount": 155,
+    "source": "company",
+    "notes": "Courier india",
+    "date": "2025-03-06",
+    "id": "1741420544541"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 80,
+    "source": "company",
+    "notes": "91762  nissan p",
+    "date": "2025-02-19",
+    "id": "1741420979251"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "24128   nissan p",
+    "date": "2025-02-20",
+    "id": "1741421075213"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 30,
+    "source": "company",
+    "notes": "20917  nissan p",
+    "date": "2025-02-21",
+    "id": "1741421137199"
+  },
+  {
+    "type": "expense",
+    "title": "Wooden box",
+    "amount": 139,
+    "source": "company",
+    "notes": "Home city ",
+    "date": "2025-02-24",
+    "id": "1741421203398"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 35,
+    "source": "company",
+    "notes": "464609  van",
+    "date": "2025-02-24",
+    "id": "1741421298301"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "924128  nissan p",
+    "date": "2025-02-27",
+    "id": "1741421368351"
+  },
+  {
+    "type": "expense",
+    "title": "Quiver",
+    "amount": 225,
+    "source": "company",
+    "notes": "Telescope 20 feet",
+    "date": "2025-02-11",
+    "id": "1741423613898"
+  },
+  {
+    "type": "expense",
+    "title": "Quiver",
+    "amount": 275,
+    "source": "company",
+    "notes": "Telescope 40 feet",
+    "date": "2025-02-12",
+    "id": "1741423670743"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 60,
+    "source": "company",
+    "notes": "Belt and ramba",
+    "date": "2025-02-17",
+    "id": "1741423818272"
+  },
+  {
+    "type": "expense",
+    "title": "Quiver",
+    "amount": 300,
+    "source": "company",
+    "notes": "Telescope 40 f",
+    "date": "2025-02-22",
+    "id": "1741424007221"
+  },
+  {
+    "type": "expense",
+    "title": "Kafeel house",
+    "amount": 700,
+    "source": "company",
+    "notes": "Telescope 40 and 20 feet",
+    "date": "2025-02-16",
+    "id": "1741432527313"
+  },
+  {
+    "type": "expense",
+    "title": "Ashir",
+    "amount": 100,
+    "source": "mine",
+    "notes": "Give to ashir",
+    "date": "2025-03-08",
+    "id": "1741433154316",
+    "status": "done"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "150210   nissan p",
+    "date": "2025-02-28",
+    "id": "1741522559726"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "784205   van",
+    "date": "2025-03-05",
+    "id": "1741522649797"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "35302 nissan p",
+    "date": "2025-03-06",
+    "id": "1741522689394"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "26870 van",
+    "date": "2025-03-07",
+    "id": "1741522728994"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "419551 nissan p",
+    "date": "2025-03-09",
+    "id": "1741522768398"
+  },
+  {
+    "type": "expense",
+    "title": "Packing meterial",
+    "amount": 100,
+    "source": "company",
+    "notes": "Bubble roll",
+    "date": "2025-03-04",
+    "id": "1741522941403"
+  },
+  {
+    "type": "expense",
+    "title": "Packing meterial",
+    "amount": 360,
+    "source": "company",
+    "notes": "Bubble and cartoon clothes",
+    "date": "2025-03-01",
+    "id": "1741523031093"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 30,
+    "source": "company",
+    "notes": "Home city",
+    "date": "2025-03-05",
+    "id": "1741523085003"
+  },
+  {
+    "type": "expense",
+    "title": "Home city",
+    "amount": 20,
+    "source": "company",
+    "notes": "",
+    "date": "2025-03-06",
+    "id": "1741523116423"
+  },
+  {
+    "type": "income",
+    "title": "7216",
+    "amount": 355,
+    "source": "company",
+    "notes": "Sea cargo",
+    "date": "2025-02-20",
+    "id": "1741524400897",
+    "status": "pending"
+  },
+  {
+    "type": "expense",
+    "title": "Lug job",
+    "amount": 90,
+    "source": "company",
+    "notes": "9 pallets",
+    "date": "2025-03-16",
+    "id": "1742147317008"
+  },
+  {
+    "type": "expense",
+    "title": "Abubsamrah job",
+    "amount": 200,
+    "source": "company",
+    "notes": "4 labors pacha",
+    "date": "2025-03-15",
+    "id": "1742204477588"
+  },
+  {
+    "type": "income",
+    "title": "People",
+    "amount": 100,
+    "source": "others",
+    "notes": "Shumaizka",
+    "date": "2025-03-26",
+    "id": "1742988684602"
+  },
+  {
+    "type": "income",
+    "title": "7265",
+    "amount": 610,
+    "source": "company",
+    "notes": "Sea collection",
+    "date": "2025-03-22",
+    "id": "1742988880506"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 100,
+    "source": "company",
+    "notes": "Bubble 2 pcs ",
+    "date": "2025-03-03",
+    "id": "1744041115849"
+  },
+  {
+    "type": "expense",
+    "title": "Lashing items",
+    "amount": 210,
+    "source": "company",
+    "notes": "Cargo master lashing job",
+    "date": "2025-03-18",
+    "id": "1744041179111"
+  },
+  {
+    "type": "expense",
+    "title": "Weight machine ",
+    "amount": 400,
+    "source": "company",
+    "notes": "Repair machine",
+    "date": "2025-03-18",
+    "id": "1744041308502"
+  },
+  {
+    "type": "expense",
+    "title": "Packing items",
+    "amount": 360,
+    "source": "company",
+    "notes": "3 bubble 2 cartoon roll",
+    "date": "2025-03-01",
+    "id": "1744041389611"
+  },
+  {
+    "type": "expense",
+    "title": "189727",
+    "amount": 110,
+    "source": "company",
+    "notes": "Oil change nissan pickup",
+    "date": "2025-03-29",
+    "id": "1744041446004"
+  },
+  {
+    "type": "expense",
+    "title": "Wooden packing item",
+    "amount": 105,
+    "source": "company",
+    "notes": "Only make pallet",
+    "date": "2025-03-12",
+    "id": "1744041609792"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing",
+    "amount": 30,
+    "source": "company",
+    "notes": "",
+    "date": "2025-03-05",
+    "id": "1744042255310"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 20,
+    "source": "company",
+    "notes": "Film roll",
+    "date": "2025-03-06",
+    "id": "1744042321201"
+  },
+  {
+    "type": "expense",
+    "title": "Lashing items",
+    "amount": 15,
+    "source": "company",
+    "notes": "Cargo master ",
+    "date": "2025-03-19",
+    "id": "1744042424578"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 70,
+    "source": "company",
+    "notes": "Film roll",
+    "date": "2025-03-03",
+    "id": "1744042570147"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 22,
+    "source": "company",
+    "notes": "Night work move five",
+    "date": "2025-03-27",
+    "id": "1744042676911"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 4,
+    "source": "company",
+    "notes": "Move five job",
+    "date": "2025-03-23",
+    "id": "1744042730709"
+  },
+  {
+    "type": "expense",
+    "title": "Packing item",
+    "amount": 100,
+    "source": "company",
+    "notes": "Film roll",
+    "date": "2025-03-27",
+    "id": "1744042763609"
+  },
+  {
+    "type": "expense",
+    "title": "Typing senter",
+    "amount": 10,
+    "source": "company",
+    "notes": "Gate pass leter",
+    "date": "2025-03-25",
+    "id": "1744042820085"
+  },
+  {
+    "type": "expense",
+    "title": "Food",
+    "amount": 51,
+    "source": "company",
+    "notes": "",
+    "date": "2025-03-28",
+    "id": "1744042859904"
+  },
+  {
+    "type": "expense",
+    "title": "189727",
+    "amount": 400,
+    "source": "company",
+    "notes": "Self moter change",
+    "date": "2025-04-03",
+    "id": "1744043015501"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "4547614",
+    "date": "2025-03-24",
+    "id": "1744043144200"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 90,
+    "source": "company",
+    "notes": "Mitsubishi silin pump",
+    "date": "2025-04-01",
+    "id": "1744043211305"
+  },
+  {
+    "type": "expense",
+    "title": "Peteol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Nissan pickup silin pump",
+    "date": "2025-04-03",
+    "id": "1744043273925"
+  },
+  {
+    "type": "income",
+    "title": "7255",
+    "amount": 291,
+    "source": "company",
+    "notes": "Sea cargo",
+    "date": "2025-03-13",
+    "id": "1744114967333"
+  },
+  {
+    "type": "income",
+    "title": "7256",
+    "amount": 2065,
+    "source": "company",
+    "notes": "Air ub",
+    "date": "2025-03-15",
+    "id": "1744115008712"
+  },
+  {
+    "type": "income",
+    "title": "7261",
+    "amount": 185,
+    "source": "company",
+    "notes": "Sea balance paid",
+    "date": "2025-04-08",
+    "id": "1744115057342"
+  },
+  {
+    "type": "income",
+    "title": "7286",
+    "amount": 560,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-04-03",
+    "id": "1744115097016"
+  },
+  {
+    "type": "income",
+    "title": "7282",
+    "amount": 280,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-04-01",
+    "id": "1744115144302"
+  },
+  {
+    "type": "income",
+    "title": "7279",
+    "amount": 210,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-03-27",
+    "id": "1744115196199"
+  },
+  {
+    "type": "income",
+    "title": "7265",
+    "amount": 610,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-03-22",
+    "id": "1744115238009"
+  },
+  {
+    "type": "income",
+    "title": "7264",
+    "amount": 310,
+    "source": "company",
+    "notes": "Air ind",
+    "date": "2025-03-20",
+    "id": "1744115283367"
+  },
+  {
+    "type": "income",
+    "title": "7269",
+    "amount": 385,
+    "source": "company",
+    "notes": "Air exp ind",
+    "date": "2025-03-22",
+    "id": "1744115325529"
+  },
+  {
+    "type": "income",
+    "title": "7287",
+    "amount": 483,
+    "source": "company",
+    "notes": "Air ub",
+    "date": "2025-04-03",
+    "id": "1744115403699"
+  },
+  {
+    "type": "income",
+    "title": "7285",
+    "amount": 230,
+    "source": "company",
+    "notes": "Air ub",
+    "date": "2025-04-03",
+    "id": "1744115432401"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 100,
+    "source": "others",
+    "notes": "Cbq",
+    "date": "2025-04-08",
+    "id": "1744115486027"
+  },
+  {
+    "type": "expense",
+    "title": "Thambi",
+    "amount": 200,
+    "source": "others",
+    "notes": "Salary advance",
+    "date": "2025-04-08",
+    "id": "1744115571739"
+  },
+  {
+    "type": "expense",
+    "title": "Dubai truck",
+    "amount": 1000,
+    "source": "company",
+    "notes": "3 ton pickup",
+    "date": "2025-04-13",
+    "id": "1744545474583"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "72629",
+    "date": "2025-03-11",
+    "id": "1744546060967"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "0588",
+    "date": "2025-03-17",
+    "id": "1744546087367"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 70,
+    "source": "company",
+    "notes": "60358",
+    "date": "2025-03-20",
+    "id": "1744546112468"
+  },
+  {
+    "type": "expense",
+    "title": "petrol - desiel",
+    "amount": 100,
+    "source": "company",
+    "notes": "18107",
+    "date": "2025-04-20",
+    "id": "1744546143472"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "17547",
+    "date": "2025-03-23",
+    "id": "1744546173468"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 21,
+    "source": "company",
+    "notes": "4134",
+    "date": "2025-03-26",
+    "id": "1744546196075"
+  },
+  {
+    "type": "expense",
+    "title": "petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "0549",
+    "date": "2025-03-28",
+    "id": "1744546214472"
+  },
+  {
+    "type": "expense",
+    "title": "petrol - diesel",
+    "amount": 30,
+    "source": "company",
+    "notes": "26677 - export car",
+    "date": "2025-04-09",
+    "id": "1744546250373"
+  },
+  {
+    "type": "expense",
+    "title": "altalb wooden packing",
+    "amount": 570,
+    "source": "company",
+    "notes": "playwood 10 pc",
+    "date": "2025-04-08",
+    "id": "1744546464281"
+  },
+  {
+    "type": "expense",
+    "title": "Sidy car lashing",
+    "amount": 36,
+    "source": "company",
+    "notes": "Belt and nile",
+    "date": "2025-04-09",
+    "id": "1744546636668"
+  },
+  {
+    "type": "expense",
+    "title": "Sidy car lashing",
+    "amount": 110,
+    "source": "company",
+    "notes": "70 ramba, 20 food, 20 belt",
+    "date": "2025-04-09",
+    "id": "1744546738067"
+  },
+  {
+    "type": "expense",
+    "title": "Al talib woodem box",
+    "amount": 15,
+    "source": "company",
+    "notes": "Black screw ",
+    "date": "2025-04-09",
+    "id": "1744546872454"
+  },
+  
+  
+  
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "584576",
+    "date": "2025-04-13",
+    "id": "1745076175198"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 80,
+    "source": "company",
+    "notes": "588971 ",
+    "date": "2025-04-15",
+    "id": "1745076226998"
+  },
+  {
+    "type": "expense",
+    "title": "Car lashing and personal effects",
+    "amount": 49,
+    "source": "company",
+    "notes": "Lebanan customer",
+    "date": "2025-04-17",
+    "id": "1745077040580"
+  },
+  {
+    "type": "expense",
+    "title": "Car wash",
+    "amount": 25,
+    "source": "company",
+    "notes": "Nissan pickup",
+    "date": "2025-04-17",
+    "id": "1745077107478"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Urvan 595346",
+    "date": "2025-04-19",
+    "id": "1745077161416"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 100,
+    "source": "company",
+    "notes": "565597 mistubishi",
+    "date": "2025-04-14",
+    "id": "1745077250286"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "001101",
+    "date": "2025-04-17",
+    "id": "1745077355978"
+  },
+  {
+    "type": "income",
+    "title": "7372",
+    "amount": 240,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-04-24",
+    "id": "1745495013353"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 100,
+    "source": "company",
+    "notes": "445454",
+    "date": "2025-04-24",
+    "id": "1745495178551"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel",
+    "amount": 100,
+    "source": "company",
+    "notes": "847409",
+    "date": "2025-04-10",
+    "id": "1745495251144"
+  },
+  {
+    "type": "income",
+    "title": "Transportation",
+    "amount": 100,
+    "source": "company",
+    "notes": "Tv moving",
+    "date": "2025-04-23",
+    "id": "1745495305550"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 1000,
+    "source": "company",
+    "notes": "Cba bank",
+    "date": "2025-04-20",
+    "id": "1745505293470"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 850,
+    "source": "company",
+    "notes": "Cbq bank",
+    "date": "2025-04-21",
+    "id": "1745505335756"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 200,
+    "source": "company",
+    "notes": "Cba Bank",
+    "date": "2025-04-22",
+    "id": "1745505360558"
+  },
+  {
+    "type": "income",
+    "title": "Shumaizka",
+    "amount": 750,
+    "source": "company",
+    "notes": "Cba Bank",
+    "date": "2025-04-23",
+    "id": "1745505391152"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 776,
+    "source": "company",
+    "notes": "Home city 70821",
+    "date": "2025-04-20",
+    "id": "1745505561273"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 505,
+    "source": "company",
+    "notes": "Home city 71848",
+    "date": "2025-04-21",
+    "id": "1745505606557"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 100,
+    "source": "company",
+    "notes": "Hope city 86907",
+    "date": "2025-04-21",
+    "id": "1745505670748"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 200,
+    "source": "company",
+    "notes": "236214 refa",
+    "date": "2025-04-21",
+    "id": "1745505722552"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 80,
+    "source": "company",
+    "notes": "Solar 488127",
+    "date": "2025-04-21",
+    "id": "1745505794758"
+  },
+  {
+    "type": "expense",
+    "title": "Sam & jetli ",
+    "amount": 138,
+    "source": "company",
+    "notes": "Zain 70209",
+    "date": "2025-04-23",
+    "id": "1745505897124"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 230,
+    "source": "company",
+    "notes": "Zain 70322",
+    "date": "2025-04-23",
+    "id": "1745505979663"
+  },
+  {
+    "type": "expense",
+    "title": "Lug baladna",
+    "amount": 130,
+    "source": "company",
+    "notes": "Home city 69151",
+    "date": "2025-04-23",
+    "id": "1745506015162"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Van 487746",
+    "date": "2025-04-24",
+    "id": "1745506063056"
+  },
+  {
+    "type": "expense",
+    "title": "Qbh 2 machine lashing",
+    "amount": 450,
+    "source": "company",
+    "notes": "7 ten forklift",
+    "date": "2025-04-23",
+    "id": "1746004039985"
+  },
+  {
+    "type": "expense",
+    "title": "Qbh 2 machine lashing",
+    "amount": 200,
+    "source": "company",
+    "notes": "2 labor",
+    "date": "2025-04-23",
+    "id": "1746004078678"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 50,
+    "source": "company",
+    "notes": "Nissan pickup 82888",
+    "date": "2025-04-28",
+    "id": "1746004233860"
+  },
+  
+  
+  
+
+  {
     "type": "expense",
     "title": "Car lashing ",
     "amount": 100,
@@ -342,3 +1459,4 @@
     "id": "1747735575418"
   }
 ]
+  
