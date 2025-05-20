@@ -331,5 +331,14 @@
     "notes": "Sea ind balance a/c transfer",
     "date": "2025-04-26",
     "id": "1747734810955"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol",
+    "amount": 100,
+    "source": "company",
+    "notes": "Nissan 3655071",
+    "date": "2025-05-20",
+    "id": "1747735575418"
   }
 ]
