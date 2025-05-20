@@ -322,5 +322,14 @@
     "notes": "Sea ind",
     "date": "2025-05-03",
     "id": "1747733640770"
+  },
+  {
+    "type": "income",
+    "title": "4531",
+    "amount": 430,
+    "source": "company",
+    "notes": "Sea ind balance a/c transfer",
+    "date": "2025-04-26",
+    "id": "1747734810955"
   }
 ]
