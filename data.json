@@ -295,5 +295,32 @@
     "notes": "Ind air",
     "date": "2025-05-10",
     "id": "1747733452136"
+  },
+  {
+    "type": "income",
+    "title": "7419",
+    "amount": 290,
+    "source": "company",
+    "notes": "Air ind",
+    "date": "2025-05-14",
+    "id": "1747733551752"
+  },
+  {
+    "type": "income",
+    "title": "7389",
+    "amount": 215,
+    "source": "company",
+    "notes": "Ind ub",
+    "date": "2025-05-02",
+    "id": "1747733608091"
+  },
+  {
+    "type": "income",
+    "title": "7390",
+    "amount": 140,
+    "source": "company",
+    "notes": "Sea ind",
+    "date": "2025-05-03",
+    "id": "1747733640770"
   }
 ]
