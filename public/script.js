@@ -125,30 +125,6 @@ document.getElementById('source').addEventListener('change', function () {
   showInput('inputNotes');
 });
 
-function deleteSelectedEntries() {
-  const selectedRows = document.querySelectorAll('input[type="checkbox"]:checked');
-  
-  selectedRows.forEach(checkbox => {
-    const row = checkbox.closest('tr');
-    const amountCell = row.querySelector('td:nth-child(4)');
-    const amount = parseFloat(amountCell.textContent.replace('$', ''));
-    const type = amountCell.classList.contains('green') ? 'income' : 'expense';
-
-    if (type === 'income') {
-      totalIncome -= amount;
-      document.getElementById('totalIncome').textContent = `$${totalIncome.toFixed(2)}`;
-    } else {
-      totalExpenses -= amount;
-      document.getElementById('totalExpenses').textContent = `$${totalExpenses.toFixed(2)}`;
-    }
-
-    row.classList.add('deleted');
-    setTimeout(() => row.remove(), 3000);
-  });
-
-  const netTotal = totalIncome - totalExpenses;
-  document.getElementById('netTotal').textContent = `$${netTotal.toFixed(2)}`;
-}
 
 function deleteAllEntries() {
   const tableBody = document.getElementById('entriesTableBody');
