@@ -1,0 +1,11 @@
+[
+  {
+    "type": "expense",
+    "title": "Link shipping ",
+    "amount": 50,
+    "source": "company",
+    "notes": "5 pallets scorpio store",
+    "date": "2025-05-22",
+    "id": "1747921382551"
+  }
+]
