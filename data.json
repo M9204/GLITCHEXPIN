@@ -52,5 +52,41 @@
     "notes": "Uae shipment loading in store ",
     "date": "2025-05-22",
     "id": "1748201348960"
+  },
+  {
+    "type": "expense",
+    "title": "UAE loading ",
+    "amount": 69,
+    "source": "company",
+    "notes": "Fillim roll zain 74910",
+    "date": "2025-05-22",
+    "id": "1748203714874"
+  },
+  {
+    "type": "expense",
+    "title": "Birkath store ",
+    "amount": 7,
+    "source": "company",
+    "notes": "Water ",
+    "date": "2025-05-22",
+    "id": "1748203766760"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "Nissan pickup 202847",
+    "date": "2025-05-24",
+    "id": "1748204191965"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel ",
+    "amount": 100,
+    "source": "company",
+    "notes": "Hyundai 34847",
+    "date": "2025-05-24",
+    "id": "1748204242558"
   }
 ]
