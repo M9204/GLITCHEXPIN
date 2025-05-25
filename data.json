@@ -51,7 +51,8 @@
     "source": "company",
     "notes": "Uae shipment loading in store ",
     "date": "2025-05-22",
-    "id": "1748201348960"
+    "id": "1748201348960",
+    "status": "done"
   },
   {
     "type": "expense",
@@ -106,5 +107,23 @@
     "notes": "Packing material 134230 al qallaf",
     "date": "2025-05-25",
     "id": "1748204465763"
+  },
+  {
+    "type": "expense",
+    "title": "Lug work kuwait ",
+    "amount": 54,
+    "source": "company",
+    "notes": "5 labour food night ",
+    "date": "2025-05-25",
+    "id": "1748204968964"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "Urvan 512221",
+    "date": "2025-05-25",
+    "id": "1748205150161"
   }
 ]
