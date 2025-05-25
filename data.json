@@ -7,5 +7,32 @@
     "notes": "5 pallets scorpio store",
     "date": "2025-05-22",
     "id": "1747921382551"
+  },
+  {
+    "type": "expense",
+    "title": "A 4 paper ",
+    "amount": 50,
+    "source": "company",
+    "notes": "Lug customer return give ",
+    "date": "2025-05-25",
+    "id": "1748200703971"
+  },
+  {
+    "type": "expense",
+    "title": "QBH mubashir job",
+    "amount": 30,
+    "source": "company",
+    "notes": "Water and food",
+    "date": "2025-05-24",
+    "id": "1748200767056"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "Nissan pickup 3655071",
+    "date": "2025-05-20",
+    "id": "1748201175258"
   }
 ]
