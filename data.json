@@ -34,5 +34,23 @@
     "notes": "Nissan pickup 3655071",
     "date": "2025-05-20",
     "id": "1748201175258"
+  },
+  {
+    "type": "expense",
+    "title": "Sidy abusamrah ",
+    "amount": 30,
+    "source": "company",
+    "notes": "Pajero car wash 3645",
+    "date": "2025-05-21",
+    "id": "1748201270672"
+  },
+  {
+    "type": "income",
+    "title": "Uae loading ",
+    "amount": 69,
+    "source": "company",
+    "notes": "Uae shipment loading in store ",
+    "date": "2025-05-22",
+    "id": "1748201348960"
   }
 ]
