@@ -88,5 +88,23 @@
     "notes": "Hyundai 34847",
     "date": "2025-05-24",
     "id": "1748204242558"
+  },
+  {
+    "type": "expense",
+    "title": "CFS qncc job",
+    "amount": 59,
+    "source": "company",
+    "notes": "Food 70 Qr 7 labour night work ",
+    "date": "2025-05-25",
+    "id": "1748204397006"
+  },
+  {
+    "type": "expense",
+    "title": "Lug work ",
+    "amount": 805,
+    "source": "company",
+    "notes": "Packing material 134230 al qallaf",
+    "date": "2025-05-25",
+    "id": "1748204465763"
   }
 ]
