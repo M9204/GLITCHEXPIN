@@ -45,16 +45,6 @@
     "id": "1748201270672"
   },
   {
-    "type": "income",
-    "title": "Uae loading ",
-    "amount": 69,
-    "source": "company",
-    "notes": "Uae shipment loading in store ",
-    "date": "2025-05-22",
-    "id": "1748201348960",
-    "status": "done"
-  },
-  {
     "type": "expense",
     "title": "UAE loading ",
     "amount": 69,
