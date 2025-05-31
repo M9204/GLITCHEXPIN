@@ -7,5 +7,14 @@
     "notes": "30 food\n60 tv wooden packing ",
     "date": "2025-05-27",
     "id": "1748384864250"
+  },
+  {
+    "type": "expense",
+    "title": "Pallet making ",
+    "amount": 40,
+    "source": "company",
+    "notes": "Rashid,thambi",
+    "date": "2025-05-31",
+    "id": "1748727283262"
   }
 ]
