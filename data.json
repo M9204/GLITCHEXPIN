@@ -16,5 +16,14 @@
     "notes": "Rashid,thambi",
     "date": "2025-05-31",
     "id": "1748727283262"
+  },
+  {
+    "type": "expense",
+    "title": "Food ",
+    "amount": 52,
+    "source": "company",
+    "notes": "Loading job",
+    "date": "2025-05-25",
+    "id": "1749125882249"
   }
 ]
