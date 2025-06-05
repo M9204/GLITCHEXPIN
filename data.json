@@ -97,5 +97,41 @@
     "notes": "7683321",
     "date": "2025-06-03",
     "id": "1749126710038"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "909825",
+    "date": "2025-05-28",
+    "id": "1749127327641"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "7695",
+    "date": "2025-05-31",
+    "id": "1749127396066"
+  },
+  {
+    "type": "expense",
+    "title": "Diesel ",
+    "amount": 100,
+    "source": "company",
+    "notes": "94025",
+    "date": "2025-05-31",
+    "id": "1749127470535"
+  },
+  {
+    "type": "expense",
+    "title": "Cargo master ",
+    "amount": 420,
+    "source": "company",
+    "notes": "Tosc 2209",
+    "date": "2025-06-27",
+    "id": "1749127888144"
   }
 ]
