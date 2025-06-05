@@ -79,5 +79,23 @@
     "notes": "Zain 76594",
     "date": "2025-06-02",
     "id": "1749126504651"
+  },
+  {
+    "type": "expense",
+    "title": "CFS car lashing ",
+    "amount": 30,
+    "source": "company",
+    "notes": "Home city -15483",
+    "date": "2025-06-05",
+    "id": "1749126648325"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "7683321",
+    "date": "2025-06-03",
+    "id": "1749126710038"
   }
 ]
