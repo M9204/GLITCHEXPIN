@@ -25,5 +25,59 @@
     "notes": "Loading job",
     "date": "2025-05-25",
     "id": "1749125882249"
+  },
+  {
+    "type": "expense",
+    "title": "Home city ",
+    "amount": 4,
+    "source": "company",
+    "notes": "Home city 12392",
+    "date": "2025-05-28",
+    "id": "1749126101535"
+  },
+  {
+    "type": "expense",
+    "title": "Cargo master alkhor ",
+    "amount": 26,
+    "source": "company",
+    "notes": "Home city 12970",
+    "date": "2025-05-28",
+    "id": "1749126166838"
+  },
+  {
+    "type": "expense",
+    "title": "Pallet packing ",
+    "amount": 230,
+    "source": "company",
+    "notes": "Zain 76178",
+    "date": "2025-05-31",
+    "id": "1749126235478"
+  },
+  {
+    "type": "expense",
+    "title": "Pallet packing ",
+    "amount": 160,
+    "source": "company",
+    "notes": "Zain 76405",
+    "date": "2025-06-01",
+    "id": "1749126302735"
+  },
+  {
+    "type": "expense",
+    "title": "Pallet packing ",
+    "amount": 415,
+    "source": "company",
+    "notes": "Home city 15095",
+    "date": "2025-06-02",
+    "id": "1749126424844"
+  },
+  {
+    "type": "expense",
+    "title": "Pallet packing ",
+    "amount": 65,
+    "source": "company",
+    "notes": "Zain 76594",
+    "date": "2025-06-02",
+    "id": "1749126504651"
   }
 ]
