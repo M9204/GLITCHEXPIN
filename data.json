@@ -133,5 +133,32 @@
     "notes": "Tosc 2209",
     "date": "2025-06-27",
     "id": "1749127888144"
+  },
+  {
+    "type": "income",
+    "title": "Pallet packing ",
+    "amount": 800,
+    "source": "company",
+    "notes": "",
+    "date": "2025-05-29",
+    "id": "1749128221178"
+  },
+  {
+    "type": "income",
+    "title": "Pallet ",
+    "amount": 550,
+    "source": "company",
+    "notes": "50 Qr lees other qr",
+    "date": "2025-06-01",
+    "id": "1749128286843"
+  },
+  {
+    "type": "income",
+    "title": "Pallet ",
+    "amount": 800,
+    "source": "company",
+    "notes": "",
+    "date": "2025-06-02",
+    "id": "1749128337138"
   }
 ]
