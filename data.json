@@ -160,5 +160,41 @@
     "notes": "",
     "date": "2025-06-02",
     "id": "1749128337138"
+  },
+  {
+    "type": "income",
+    "title": "7430",
+    "amount": 1000,
+    "source": "company",
+    "notes": "Sea ind balance amount ",
+    "date": "2025-05-28",
+    "id": "1749462123663"
+  },
+  {
+    "type": "expense",
+    "title": "Mitsubishi pickup ",
+    "amount": 72,
+    "source": "company",
+    "notes": "Reflections sticker ",
+    "date": "2025-06-03",
+    "id": "1749462324459"
+  },
+  {
+    "type": "expense",
+    "title": "Mitsubishi pickup ",
+    "amount": 90,
+    "source": "company",
+    "notes": "Light ,bulb",
+    "date": "2025-06-03",
+    "id": "1749462399947"
+  },
+  {
+    "type": "expense",
+    "title": "Mitsubishi pickup ",
+    "amount": 90,
+    "source": "company",
+    "notes": "Jack washing ",
+    "date": "2025-06-03",
+    "id": "1749462464236"
   }
 ]
