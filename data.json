@@ -241,5 +241,14 @@
     "notes": "Out labour ",
     "date": "2025-06-04",
     "id": "1749465645157"
+  },
+  {
+    "type": "expense",
+    "title": "Pallet making ",
+    "amount": 20,
+    "source": "company",
+    "notes": "Rashid night ",
+    "date": "2025-06-01",
+    "id": "1749466860856"
   }
 ]
