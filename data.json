@@ -232,5 +232,14 @@
     "notes": "3 labour ",
     "date": "2025-05-31",
     "id": "1749465279435"
+  },
+  {
+    "type": "expense",
+    "title": "QBH rishaj job",
+    "amount": 150,
+    "source": "company",
+    "notes": "Out labour ",
+    "date": "2025-06-04",
+    "id": "1749465645157"
   }
 ]
