@@ -196,5 +196,23 @@
     "notes": "Jack washing ",
     "date": "2025-06-03",
     "id": "1749462464236"
+  },
+  {
+    "type": "expense",
+    "title": "6330 receipt ",
+    "amount": 250,
+    "source": "company",
+    "notes": "Cartoon delivery ",
+    "date": "2025-06-05",
+    "id": "1749463392545"
+  },
+  {
+    "type": "income",
+    "title": "6330 receipt ",
+    "amount": 250,
+    "source": "company",
+    "notes": "Cartoon delivery ",
+    "date": "2025-06-05",
+    "id": "1749463437480"
   }
 ]
