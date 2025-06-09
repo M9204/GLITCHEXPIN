@@ -214,5 +214,23 @@
     "notes": "Cartoon delivery ",
     "date": "2025-06-05",
     "id": "1749463437480"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "Nissan pickup ",
+    "date": "2025-06-05",
+    "id": "1749464836747"
+  },
+  {
+    "type": "expense",
+    "title": "Pallet making ",
+    "amount": 75,
+    "source": "company",
+    "notes": "3 labour ",
+    "date": "2025-05-31",
+    "id": "1749465279435"
   }
 ]
