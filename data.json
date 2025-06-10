@@ -250,5 +250,14 @@
     "notes": "Rashid night ",
     "date": "2025-06-01",
     "id": "1749466860856"
+  },
+  {
+    "type": "expense",
+    "title": "Food ",
+    "amount": 30,
+    "source": "company",
+    "notes": "Lug loading and safe sea packing ",
+    "date": "2025-06-10",
+    "id": "1749549787566"
   }
 ]
