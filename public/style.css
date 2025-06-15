@@ -12,9 +12,10 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   min-height: 100vh;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 /* Main Container */
@@ -22,9 +23,10 @@ body {
   background-color: #fff;
   border-radius: 10px;
   padding: 30px;
-  max-width: 900px;
   width: 100%;
+  max-width: 900px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 /* Header Section */
@@ -36,21 +38,25 @@ body {
 .header h1 {
   font-size: 2.5em;
   color: #2c3e50;
+  word-wrap: break-word;
 }
 
 /* Total Display Section */
 .total-display {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 30px;
   padding: 15px 0;
   border-bottom: 2px solid #f0f0f0;
+  gap: 15px;
 }
 
 .total-display h3 {
   font-size: 1.2em;
 }
 
+/* Income, Expense, and Net Total Styling */
 .green {
   color: #27ae60;
 }
@@ -67,7 +73,7 @@ body {
 /* Form Container */
 .form-container {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 15px;
   margin-bottom: 30px;
 }
@@ -163,6 +169,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  min-width: 600px;
 }
 
 th,
@@ -192,21 +199,12 @@ td {
   text-decoration: line-through;
 }
 
-/* Income and Expense Color */
-.green {
-  color: #27ae60;
-}
-
-.red {
-  color: #e74c3c;
-}
-
 /* Sticky Table Header */
-thead {
+thead th {
   position: sticky;
   top: 0;
   background-color: #3498db;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Input Focus Styling */
@@ -233,9 +231,14 @@ tr:hover {
   .total-display {
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
 
   table {
     font-size: 0.9em;
+  }
+
+  .table-container {
+    overflow-x: auto;
   }
 }
