@@ -268,5 +268,14 @@
     "notes": "Nissan pickup 55321",
     "date": "2025-06-12",
     "id": "1749980270646"
+  },
+  {
+    "type": "expense",
+    "title": "Petrol ",
+    "amount": 100,
+    "source": "company",
+    "notes": "Nissan pickup 0774",
+    "date": "2025-06-15",
+    "id": "1749980378745"
   }
 ]
