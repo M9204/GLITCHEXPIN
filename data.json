@@ -277,5 +277,23 @@
     "notes": "Nissan pickup 0774",
     "date": "2025-06-15",
     "id": "1749980378745"
+  },
+  {
+    "type": "expense",
+    "title": "Saneek Salary advance ",
+    "amount": 150,
+    "source": "company",
+    "notes": "Thambi",
+    "date": "2025-06-16",
+    "id": "1750088215720"
+  },
+  {
+    "type": "expense",
+    "title": "Tip",
+    "amount": 40,
+    "source": "company",
+    "notes": "4 pallet packing \nRashid , Tony 20+20",
+    "date": "2025-06-16",
+    "id": "1750088314814"
   }
 ]
