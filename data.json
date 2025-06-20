@@ -295,5 +295,23 @@
     "notes": "4 pallet packing \nRashid , Tony 20+20",
     "date": "2025-06-16",
     "id": "1750088314814"
+  },
+  {
+    "type": "income",
+    "title": "Cycle pick and delivery ",
+    "amount": 60,
+    "source": "company",
+    "notes": "3 time 20+20+20",
+    "date": "2025-06-18",
+    "id": "1750420469660"
+  },
+  {
+    "type": "income",
+    "title": "Cartoon delivery 2",
+    "amount": 17,
+    "source": "company",
+    "notes": "2 cartoon XL",
+    "date": "2025-06-19",
+    "id": "1750420631550"
   }
 ]
