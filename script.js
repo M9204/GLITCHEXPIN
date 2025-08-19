@@ -1,13 +1,13 @@
 console.log("script.js loaded");
 
 let totalIncome = 0, totalExpenses = 0;
-let entries = []; // always an array
+let entries = []; // must always be an array
 let accessToken = null, fileId = null;
 const FILE_NAME = "tracker_data.json";
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; // replace
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
 
-// Google API init
+// Initialize Google API
 function initGoogleAPI() {
   gapi.load("client", async () => {
     await gapi.client.init({
@@ -16,35 +16,41 @@ function initGoogleAPI() {
   });
 }
 
-// Login/Logout buttons
+// Google Login
 document.getElementById("loginBtn").addEventListener("click", () => {
   google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
-    callback: (resp) => {
+    callback: async (resp) => {
       accessToken = resp.access_token;
       document.getElementById("loginBtn").classList.add("hidden");
       document.getElementById("logoutBtn").classList.remove("hidden");
       document.getElementById("userInfo").innerText = "Signed in!";
-      loadData();
+      await loadData();
     }
   }).requestAccessToken();
 });
 
+// Google Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   accessToken = null;
   entries = [];
-  document.getElementById("entriesTableBody").innerHTML = "";
-  totalIncome = 0; totalExpenses = 0;
-  document.getElementById("totalIncome").textContent = "$0.00";
-  document.getElementById("totalExpenses").textContent = "$0.00";
-  document.getElementById("netTotal").textContent = "$0.00";
+  resetTableAndTotals();
   document.getElementById("loginBtn").classList.remove("hidden");
   document.getElementById("logoutBtn").classList.add("hidden");
   document.getElementById("userInfo").innerText = "";
 });
 
-// Drive helpers
+// Helper to reset table & totals
+function resetTableAndTotals() {
+  document.getElementById("entriesTableBody").innerHTML = "";
+  totalIncome = 0; totalExpenses = 0;
+  document.getElementById("totalIncome").textContent = "$0.00";
+  document.getElementById("totalExpenses").textContent = "$0.00";
+  document.getElementById("netTotal").textContent = "$0.00";
+}
+
+// Get or create Drive file
 async function getFileId() {
   let res = await gapi.client.drive.files.list({
     q: `name='${FILE_NAME}' and trashed=false`,
@@ -52,7 +58,7 @@ async function getFileId() {
   });
   if (res.result.files.length > 0) return res.result.files[0].id;
 
-  // Create file if missing
+  // Create new file if missing
   let createRes = await gapi.client.request({
     path: "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
     method: "POST",
@@ -62,6 +68,7 @@ async function getFileId() {
   return createRes.result.id;
 }
 
+// Save entries to Drive
 async function saveToDrive() {
   if (!accessToken) return;
   if (!fileId) fileId = await getFileId();
@@ -71,10 +78,10 @@ async function saveToDrive() {
     headers: { "Content-Type": "application/json", Authorization: "Bearer " + accessToken },
     body: JSON.stringify(entries)
   });
-  alert("Data synced with Google Drive!");
+  console.log("Data synced with Google Drive");
 }
 
-// Load data safely
+// Load entries safely from Drive
 async function loadData() {
   if (!accessToken) return;
   try {
@@ -88,17 +95,13 @@ async function loadData() {
     try {
       entries = res.body ? JSON.parse(res.body) : [];
       if (!Array.isArray(entries)) entries = [];
-    } catch(e) {
+    } catch (e) {
       console.warn("Drive JSON parse failed, initializing empty array");
       entries = [];
     }
 
-    // Populate table
-    totalIncome = 0; totalExpenses = 0;
-    document.getElementById("entriesTableBody").innerHTML = "";
-    entries.forEach(entry => addRowToTable(
-      entry.type, entry.title, entry.amount, entry.source, entry.notes, entry.date, entry.id, entry.status
-    ));
+    resetTableAndTotals();
+    entries.forEach(entry => addRowToTable(entry.type, entry.title, entry.amount, entry.source, entry.notes, entry.date, entry.id, entry.status));
   } catch (err) {
     console.error("Error loading Drive data:", err);
     entries = [];
@@ -114,6 +117,7 @@ window.onload = () => {
   hideInputs();
 };
 
+// Add entry
 function setEntryType(type) {
   const title = document.getElementById("title").value;
   const amount = parseFloat(document.getElementById("amount").value);
@@ -123,17 +127,17 @@ function setEntryType(type) {
 
   if (!title || isNaN(amount) || amount <= 0) return alert("Enter valid title & amount");
 
-  const entryData = {
-    id: Date.now(),
-    type, title, amount, source, notes, date, status: ""
-  };
+  const entryData = { id: Date.now(), type, title, amount, source, notes, date, status: "" };
 
+  if (!Array.isArray(entries)) entries = []; // SAFETY
   entries.push(entryData);
+
   addRowToTable(type, title, amount, source, notes, date, entryData.id, entryData.status);
   saveToDrive();
   resetForm();
 }
 
+// Add row to table
 function addRowToTable(type, title, amount, source, notes, date, id, status) {
   const tableBody = document.getElementById("entriesTableBody");
   const row = document.createElement("tr");
@@ -155,10 +159,12 @@ function addRowToTable(type, title, amount, source, notes, date, id, status) {
     <td>${notes}</td>
   `;
 
-  row.querySelector(".status-dropdown").addEventListener("change", function() {
-    const newStatus = this.value;
+  const dropdown = row.querySelector(".status-dropdown");
+  dropdown.addEventListener("change", () => {
+    const newStatus = dropdown.value;
     updateRowBackgroundColor(row, newStatus);
-    const entry = entries.find(e => e.id===id); if(entry) entry.status = newStatus;
+    const entry = entries.find(e => e.id === id);
+    if (entry) entry.status = newStatus;
     saveToDrive();
   });
 
@@ -175,8 +181,8 @@ function updateRowBackgroundColor(row, status) {
   row.style.backgroundColor = status==="done"?"lightgreen":status==="pending"?"lightyellow":"";
 }
 
-// Progressive input reveal
-function hideInputs() {
+// Progressive inputs
+function hideInputs(){
   document.getElementById("inputAmount").classList.add("hidden");
   document.getElementById("inputSource").classList.add("hidden");
   document.getElementById("inputNotes").classList.add("hidden");
@@ -198,12 +204,12 @@ function resetForm(){
 
 // Export to Excel
 function exportToExcel(){
-  let tableRows = document.querySelectorAll("#entriesTableBody tr");
+  let rows=document.querySelectorAll("#entriesTableBody tr");
   let incomeData=[["Date","Title","Amount","Source","Notes"]];
   let expenseData=[["Date","Title","Amount","Source","Notes"]];
-  tableRows.forEach(row=>{
-    let cols=row.querySelectorAll("td");
-    let date=cols[1].textContent,title=cols[2].textContent,amount=parseFloat(cols[3].textContent.replace("$","")),source=cols[4].textContent,notes=cols[6].textContent;
+  rows.forEach(r=>{
+    let cols=r.querySelectorAll("td");
+    let date=cols[1].textContent, title=cols[2].textContent, amount=parseFloat(cols[3].textContent.replace("$","")), source=cols[4].textContent, notes=cols[6].textContent;
     cols[3].classList.contains("green")?incomeData.push([date,title,amount,source,notes]):expenseData.push([date,title,amount,source,notes]);
   });
   let totalData=[["Category","Amount"],["Total Income",totalIncome.toFixed(2)],["Total Expenses",totalExpenses.toFixed(2)],["Net Total",(totalIncome-totalExpenses).toFixed(2)]];
