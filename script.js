@@ -1,6 +1,8 @@
 console.log("script.js loaded");
 
-let totalIncome = 0, totalExpenses = 0, entries = [], accessToken = null, fileId = null;
+let totalIncome = 0, totalExpenses = 0;
+let entries = []; // Make sure entries is always an array
+let accessToken = null, fileId = null;
 const FILE_NAME = "tracker_data.json";
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; // replace
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
@@ -32,6 +34,10 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   accessToken = null;
   entries = [];
   document.getElementById("entriesTableBody").innerHTML = "";
+  totalIncome = 0; totalExpenses = 0;
+  document.getElementById("totalIncome").textContent = "$0.00";
+  document.getElementById("totalExpenses").textContent = "$0.00";
+  document.getElementById("netTotal").textContent = "$0.00";
   document.getElementById("loginBtn").classList.remove("hidden");
   document.getElementById("logoutBtn").classList.add("hidden");
   document.getElementById("userInfo").innerText = "";
@@ -44,6 +50,8 @@ async function getFileId() {
     fields: "files(id, name)"
   });
   if (res.result.files.length > 0) return res.result.files[0].id;
+
+  // Create file if not exists
   let createRes = await gapi.client.request({
     path: "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
     method: "POST",
@@ -65,16 +73,30 @@ async function saveToDrive() {
   alert("Data synced with Google Drive!");
 }
 
+// ----------- Load data from Drive -----------
 async function loadData() {
   if (!accessToken) return;
-  fileId = await getFileId();
-  let res = await gapi.client.request({
-    path: `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
-    method: "GET",
-    headers: { Authorization: "Bearer " + accessToken }
-  });
-  entries = res.body ? JSON.parse(res.body) : [];
-  entries.forEach(entry => addRowToTable(entry.type, entry.title, entry.amount, entry.source, entry.notes, entry.date, entry.id, entry.status));
+  try {
+    fileId = await getFileId();
+    let res = await gapi.client.request({
+      path: `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
+      method: "GET",
+      headers: { Authorization: "Bearer " + accessToken }
+    });
+
+    entries = res.body ? JSON.parse(res.body) : [];
+    if (!Array.isArray(entries)) entries = []; // ensure array
+
+    // Populate table & recalc totals
+    totalIncome = 0; totalExpenses = 0;
+    document.getElementById("entriesTableBody").innerHTML = "";
+    entries.forEach(entry => addRowToTable(
+      entry.type, entry.title, entry.amount, entry.source, entry.notes, entry.date, entry.id, entry.status
+    ));
+  } catch (err) {
+    console.error("Error loading Drive data:", err);
+    entries = [];
+  }
 }
 
 // ----------- App logic -----------
@@ -92,8 +114,16 @@ function setEntryType(type) {
   const source = document.getElementById("source").value;
   const notes = document.getElementById("notes").value;
   const date = document.getElementById("date").value;
-  if (!title || isNaN(amount) || amount <= 0) return alert("Enter valid title & amount");
-  const entryData = { id: Date.now(), type, title, amount, source, notes, date, status: "" };
+
+  if (!title || isNaN(amount) || amount <= 0) {
+    return alert("Enter valid title & amount");
+  }
+
+  const entryData = {
+    id: Date.now(),
+    type, title, amount, source, notes, date, status: ""
+  };
+
   entries.push(entryData);
   addRowToTable(type, title, amount, source, notes, date, entryData.id, entryData.status);
   saveToDrive();
@@ -104,6 +134,7 @@ function addRowToTable(type, title, amount, source, notes, date, id, status) {
   const tableBody = document.getElementById("entriesTableBody");
   const row = document.createElement("tr");
   row.setAttribute("data-id", id);
+
   row.innerHTML = `
     <td><input type="checkbox"></td>
     <td>${date}</td>
@@ -119,14 +150,17 @@ function addRowToTable(type, title, amount, source, notes, date, id, status) {
     </td>
     <td>${notes}</td>
   `;
+
   row.querySelector(".status-dropdown").addEventListener("change", function() {
     const newStatus = this.value;
     updateRowBackgroundColor(row, newStatus);
     const entry = entries.find(e => e.id===id); if(entry) entry.status = newStatus;
     saveToDrive();
   });
+
   tableBody.appendChild(row);
-  updateRowBackgroundColor(row,status);
+  updateRowBackgroundColor(row, status);
+
   type==="income"? totalIncome+=amount : totalExpenses+=amount;
   document.getElementById("totalIncome").textContent = `$${totalIncome.toFixed(2)}`;
   document.getElementById("totalExpenses").textContent = `$${totalExpenses.toFixed(2)}`;
