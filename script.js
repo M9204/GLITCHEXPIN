@@ -1,13 +1,13 @@
 console.log("script.js loaded");
 
 let totalIncome = 0, totalExpenses = 0;
-let entries = []; // Make sure entries is always an array
+let entries = []; // always an array
 let accessToken = null, fileId = null;
 const FILE_NAME = "tracker_data.json";
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; // replace
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
 
-// ----------- Google Drive Auth -----------
+// Google API init
 function initGoogleAPI() {
   gapi.load("client", async () => {
     await gapi.client.init({
@@ -16,6 +16,7 @@ function initGoogleAPI() {
   });
 }
 
+// Login/Logout buttons
 document.getElementById("loginBtn").addEventListener("click", () => {
   google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
@@ -43,7 +44,7 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   document.getElementById("userInfo").innerText = "";
 });
 
-// ----------- Drive helpers -----------
+// Drive helpers
 async function getFileId() {
   let res = await gapi.client.drive.files.list({
     q: `name='${FILE_NAME}' and trashed=false`,
@@ -51,7 +52,7 @@ async function getFileId() {
   });
   if (res.result.files.length > 0) return res.result.files[0].id;
 
-  // Create file if not exists
+  // Create file if missing
   let createRes = await gapi.client.request({
     path: "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
     method: "POST",
@@ -73,7 +74,7 @@ async function saveToDrive() {
   alert("Data synced with Google Drive!");
 }
 
-// ----------- Load data from Drive -----------
+// Load data safely
 async function loadData() {
   if (!accessToken) return;
   try {
@@ -84,10 +85,15 @@ async function loadData() {
       headers: { Authorization: "Bearer " + accessToken }
     });
 
-    entries = res.body ? JSON.parse(res.body) : [];
-    if (!Array.isArray(entries)) entries = []; // ensure array
+    try {
+      entries = res.body ? JSON.parse(res.body) : [];
+      if (!Array.isArray(entries)) entries = [];
+    } catch(e) {
+      console.warn("Drive JSON parse failed, initializing empty array");
+      entries = [];
+    }
 
-    // Populate table & recalc totals
+    // Populate table
     totalIncome = 0; totalExpenses = 0;
     document.getElementById("entriesTableBody").innerHTML = "";
     entries.forEach(entry => addRowToTable(
@@ -99,7 +105,7 @@ async function loadData() {
   }
 }
 
-// ----------- App logic -----------
+// App logic
 window.onload = () => {
   const dateInput = document.getElementById("date");
   dateInput.value = new Date().toISOString().split("T")[0];
@@ -115,9 +121,7 @@ function setEntryType(type) {
   const notes = document.getElementById("notes").value;
   const date = document.getElementById("date").value;
 
-  if (!title || isNaN(amount) || amount <= 0) {
-    return alert("Enter valid title & amount");
-  }
+  if (!title || isNaN(amount) || amount <= 0) return alert("Enter valid title & amount");
 
   const entryData = {
     id: Date.now(),
@@ -171,16 +175,7 @@ function updateRowBackgroundColor(row, status) {
   row.style.backgroundColor = status==="done"?"lightgreen":status==="pending"?"lightyellow":"";
 }
 
-function resetForm() {
-  document.getElementById("title").value="";
-  document.getElementById("amount").value="";
-  document.getElementById("source").value="";
-  document.getElementById("notes").value="";
-  document.getElementById("date").value=new Date().toISOString().split("T")[0];
-  hideInputs();
-}
-
-// ----------- Progressive Reveal -----------
+// Progressive input reveal
 function hideInputs() {
   document.getElementById("inputAmount").classList.add("hidden");
   document.getElementById("inputSource").classList.add("hidden");
@@ -191,7 +186,17 @@ document.getElementById("title").addEventListener("input", ()=>{if(event.target.
 document.getElementById("amount").addEventListener("input", ()=>{if(event.target.value>0) showInput("inputSource");});
 document.getElementById("source").addEventListener("change", ()=>{showInput("inputNotes");});
 
-// ----------- Export XLSX -----------
+// Reset form
+function resetForm(){
+  document.getElementById("title").value="";
+  document.getElementById("amount").value="";
+  document.getElementById("source").value="";
+  document.getElementById("notes").value="";
+  document.getElementById("date").value=new Date().toISOString().split("T")[0];
+  hideInputs();
+}
+
+// Export to Excel
 function exportToExcel(){
   let tableRows = document.querySelectorAll("#entriesTableBody tr");
   let incomeData=[["Date","Title","Amount","Source","Notes"]];
