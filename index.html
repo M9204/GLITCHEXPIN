@@ -1,344 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Expense and Income Tracker</title>
-  <link rel="stylesheet" href="./style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Expense & Income Tracker</title>
+<link rel="stylesheet" href="./style.css">
 
-  <!-- Google API libraries -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="https://apis.google.com/js/api.js"></script>
+<!-- Google API -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://apis.google.com/js/api.js"></script>
 
-  <!-- XLSX export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
-</head>
+<!-- XLSX export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+
 <style>
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body Styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  min-height: 100vh;
-  padding: 20px;
-  overflow-x: hidden;
-}
-
-/* Main Container */
-.container {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 30px;
-  width: 100%;
-  max-width: 900px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-/* Header Section */
-.header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.header h1 {
-  font-size: 2.5em;
-  color: #2c3e50;
-  word-wrap: break-word;
-}
-
-/* Total Display Section */
-.total-display {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  padding: 15px 0;
-  border-bottom: 2px solid #f0f0f0;
-  gap: 15px;
-}
-
-.total-display h3 {
-  font-size: 1.2em;
-}
-
-/* Income, Expense, and Net Total Styling */
-.green {
-  color: #27ae60;
-}
-
-.red {
-  color: #e74c3c;
-}
-
-#netTotal {
-  color: #2980b9;
-  font-weight: bold;
-}
-
-/* Form Container */
-.form-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-/* Hide by default */
-.hidden {
-  display: none;
-}
-
-/* Buttons */
-button {
-  color: white;
-  padding: 12px 25px;
-  font-size: 1.1em;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  background-color: #2ecc71;
-}
-
-/* Income Button */
-button#incomeBtn {
-  background-color: #27ae60;
-}
-
-button#incomeBtn:hover {
-  background-color: #2ecc71;
-}
-
-button#incomeBtn:active {
-  background-color: #1e8449;
-}
-
-/* Expense Button */
-button#expenseBtn {
-  background-color: #e74c3c;
-}
-
-button#expenseBtn:hover {
-  background-color: #ec7063;
-}
-
-button#expenseBtn:active {
-  background-color: #c0392b;
-}
-
-/* Reset Button */
-button#resetBtn {
-  background-color: #bdc3c7;
-}
-
-button#resetBtn:hover {
-  background-color: #95a5a6;
-}
-
-button#resetBtn:active {
-  background-color: #7f8c8d;
-}
-
-/* Entries Table */
-.table-container {
-  overflow-x: auto;
-  margin-top: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  min-width: 600px;
-}
-
-th,
-td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #3498db;
-  color: white;
-}
-
-tr:nth-child(even) {
-  background-color: #f7f7f7;
-}
-
-td {
-  font-size: 1em;
-}
-
-/* Deleted Entry Styling */
-.deleted {
-  background-color: #bdc3c7;
-  color: #7f8c8d;
-  text-decoration: line-through;
-}
-
-/* Sticky Table Header */
-thead th {
-  position: sticky;
-  top: 0;
-  background-color: #3498db;
-  z-index: 2;
-}
-
-/* Input Focus Styling */
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #3498db;
-  outline: none;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-}
-
-/* Table Row Hover Effect */
-tr:hover {
-  background-color: #ecf0f1;
-  cursor: pointer;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-  .form-container {
-    grid-template-columns: 1fr;
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f1f3f4;}
+  .container { padding: 10px; max-width: 500px; margin: auto; }
+  .header { text-align: center; margin-bottom: 10px; }
+  .form-group { margin-bottom: 8px; }
+  input, select, textarea, button { width: 100%; padding: 8px; margin-top: 2px; box-sizing: border-box; }
+  button { margin-top: 5px; }
+  .green { color: green; font-weight: bold; }
+  .red { color: red; font-weight: bold; }
+  .table-container { overflow-x: auto; margin-top: 10px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 6px; text-align: left; font-size: 14px; }
+  tr:nth-child(even) { background: #f9f9f9; }
+  .hidden { display: none; }
+  @media (max-width: 480px) {
+    th, td { font-size: 12px; padding: 4px; }
+    input, select, textarea, button { padding: 6px; font-size: 14px; }
   }
-
-  .total-display {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  table {
-    font-size: 0.9em;
-  }
-
-  .table-container {
-    overflow-x: auto;
-  }
-}
 </style>
+</head>
+
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Expense and Income Tracker</h1>
-    </div>
+<div class="container">
+  <div class="header"><h1>Expense & Income Tracker</h1></div>
 
-    <!-- Login section -->
-    <div id="authSection">
-      <button id="loginBtn">Sign in with Google</button>
-      <button id="logoutBtn" class="hidden">Sign out</button>
-      <p id="userInfo"></p>
-    </div>
-
-    <!-- Total display section -->
-    <div class="total-display">
-      <h3>Total Income: <span id="totalIncome" class="green">$0.00</span></h3>
-      <h3>Total Expenses: <span id="totalExpenses" class="red">$0.00</span></h3>
-      <h3>Net Total: <span id="netTotal">$0.00</span></h3>
-    </div>
-
-    <!-- Entry form -->
-    <div class="form-container">
-      <div id="inputTitle" class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" id="title" placeholder="Enter Title">
-      </div>
-
-      <div id="inputDate" class="form-group hidden">
-        <label for="date">Date:</label>
-        <input type="date" id="date">
-      </div>
-
-      <div id="inputAmount" class="form-group hidden">
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" placeholder="Enter Amount" step="0.01" min="0">
-      </div>
-
-      <div id="inputSource" class="form-group hidden">
-        <label for="source">Source Type:</label>
-        <select id="source">
-          <option value="">Select source</option>
-          <option value="mine">Mine</option>
-          <option value="company">Company</option>
-          <option value="others">Others</option>
-        </select>
-      </div>
-
-      <div id="inputNotes" class="form-group hidden">
-        <label for="notes">Notes:</label>
-        <textarea id="notes" placeholder="Enter Notes"></textarea>
-      </div>
-
-      <!-- Income and Expense Buttons -->
-      <button id="incomeBtn" onclick="setEntryType('income')">Add Income</button>
-      <button id="expenseBtn" onclick="setEntryType('expense')">Add Expense</button>
-      <button id="resetBtn" onclick="resetForm()">Clear</button>
-    </div>
-
-    <!-- Entries table -->
-    <button id="exportBtn" onclick="exportToExcel()">Export to Excel</button>
-
-    <div id="entriesContainer" class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Select</th>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Amount</th>
-            <th>Source</th>
-            <th>Status</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody id="entriesTableBody"></tbody>
-      </table>
-    </div>
+  <!-- Login -->
+  <div id="authSection">
+    <button id="loginBtn">Sign in with Google</button>
+    <button id="logoutBtn" class="hidden">Sign out</button>
+    <p id="userInfo"></p>
   </div>
 
-  <!-- App logic -->
-  <script src="./script.js"></script>
+  <!-- Totals -->
+  <div class="total-display">
+    <h3>Total Income: <span id="totalIncome" class="green">$0.00</span></h3>
+    <h3>Total Expenses: <span id="totalExpenses" class="red">$0.00</span></h3>
+    <h3>Net Total: <span id="netTotal">$0.00</span></h3>
+  </div>
+
+  <!-- Form -->
+  <div class="form-container">
+    <div id="inputTitle" class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" placeholder="Enter Title">
+    </div>
+
+    <div id="inputDate" class="form-group hidden">
+      <label for="date">Date:</label>
+      <input type="date" id="date">
+    </div>
+
+    <div id="inputAmount" class="form-group hidden">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter Amount" step="0.01" min="0">
+    </div>
+
+    <div id="inputSource" class="form-group hidden">
+      <label for="source">Source Type:</label>
+      <select id="source">
+        <option value="">Select source</option>
+        <option value="mine">Mine</option>
+        <option value="company">Company</option>
+        <option value="others">Others</option>
+      </select>
+    </div>
+
+    <div id="inputNotes" class="form-group hidden">
+      <label for="notes">Notes:</label>
+      <textarea id="notes" placeholder="Enter Notes"></textarea>
+    </div>
+
+    <button id="incomeBtn" onclick="setEntryType('income')">Add Income</button>
+    <button id="expenseBtn" onclick="setEntryType('expense')">Add Expense</button>
+    <button id="resetBtn" onclick="resetForm()">Clear</button>
+  </div>
+
+  <button id="exportBtn" onclick="exportToExcel()">Export to Excel</button>
+
+  <div id="entriesContainer" class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th>Amount</th>
+          <th>Source</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="entriesTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="./script.js"></script>
 </body>
 </html>
