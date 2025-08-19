@@ -1,52 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Expense & Income Tracker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense and Income Tracker</title>
 <link rel="stylesheet" href="./style.css">
 
 <!-- Google API -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="https://apis.google.com/js/api.js"></script>
 
-<!-- XLSX export -->
+<!-- XLSX -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
-
-<style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f1f3f4;}
-  .container { padding: 10px; max-width: 500px; margin: auto; }
-  .header { text-align: center; margin-bottom: 10px; }
-  .form-group { margin-bottom: 8px; }
-  input, select, textarea, button { width: 100%; padding: 8px; margin-top: 2px; box-sizing: border-box; }
-  button { margin-top: 5px; }
-  .green { color: green; font-weight: bold; }
-  .red { color: red; font-weight: bold; }
-  .table-container { overflow-x: auto; margin-top: 10px; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { border: 1px solid #ccc; padding: 6px; text-align: left; font-size: 14px; }
-  tr:nth-child(even) { background: #f9f9f9; }
-  .hidden { display: none; }
-  @media (max-width: 480px) {
-    th, td { font-size: 12px; padding: 4px; }
-    input, select, textarea, button { padding: 6px; font-size: 14px; }
-  }
-</style>
 </head>
-
 <body>
 <div class="container">
-  <div class="header"><h1>Expense & Income Tracker</h1></div>
+  <h1>Expense and Income Tracker</h1>
 
-  <!-- Login -->
-  <div id="authSection">
+  <!-- Google login -->
+  <div id="authContainer">
     <button id="loginBtn">Sign in with Google</button>
     <button id="logoutBtn" class="hidden">Sign out</button>
-    <p id="userInfo"></p>
+    <span id="userInfo"></span>
   </div>
 
   <!-- Totals -->
-  <div class="total-display">
+  <div class="totals">
     <h3>Total Income: <span id="totalIncome" class="green">$0.00</span></h3>
     <h3>Total Expenses: <span id="totalExpenses" class="red">$0.00</span></h3>
     <h3>Net Total: <span id="netTotal">$0.00</span></h3>
@@ -55,22 +34,22 @@
   <!-- Form -->
   <div class="form-container">
     <div id="inputTitle" class="form-group">
-      <label for="title">Title:</label>
+      <label>Title:</label>
       <input type="text" id="title" placeholder="Enter Title">
     </div>
 
     <div id="inputDate" class="form-group hidden">
-      <label for="date">Date:</label>
+      <label>Date:</label>
       <input type="date" id="date">
     </div>
 
     <div id="inputAmount" class="form-group hidden">
-      <label for="amount">Amount:</label>
-      <input type="number" id="amount" placeholder="Enter Amount" step="0.01" min="0">
+      <label>Amount:</label>
+      <input type="number" id="amount" step="0.01" min="0">
     </div>
 
     <div id="inputSource" class="form-group hidden">
-      <label for="source">Source Type:</label>
+      <label>Source:</label>
       <select id="source">
         <option value="">Select source</option>
         <option value="mine">Mine</option>
@@ -80,18 +59,20 @@
     </div>
 
     <div id="inputNotes" class="form-group hidden">
-      <label for="notes">Notes:</label>
+      <label>Notes:</label>
       <textarea id="notes" placeholder="Enter Notes"></textarea>
     </div>
 
-    <button id="incomeBtn" onclick="setEntryType('income')">Add Income</button>
-    <button id="expenseBtn" onclick="setEntryType('expense')">Add Expense</button>
-    <button id="resetBtn" onclick="resetForm()">Clear</button>
+    <div class="buttons">
+      <button onclick="setEntryType('income')">Add Income</button>
+      <button onclick="setEntryType('expense')">Add Expense</button>
+      <button onclick="resetForm()">Clear</button>
+      <button onclick="exportToExcel()">Export Excel</button>
+    </div>
   </div>
 
-  <button id="exportBtn" onclick="exportToExcel()">Export to Excel</button>
-
-  <div id="entriesContainer" class="table-container">
+  <!-- Table -->
+  <div class="table-container">
     <table>
       <thead>
         <tr>
