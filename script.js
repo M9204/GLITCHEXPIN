@@ -6,15 +6,13 @@ let entries = [];
 let accessToken = null;
 let fileId = null;
 const FILE_NAME = "tracker_data.json";
-const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; // <-- replace with your client_id
-const API_KEY = "YOUR_API_KEY"; // optional if you enabled it
+const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; // replace
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
 
 // ------------------ AUTH ------------------
 function initGoogleAPI() {
   gapi.load("client", async () => {
     await gapi.client.init({
-      apiKey: API_KEY,
       discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
     });
   });
@@ -49,18 +47,14 @@ async function getFileId() {
     q: `name='${FILE_NAME}' and trashed=false`,
     fields: "files(id, name)",
   });
-  if (res.result.files.length > 0) {
-    return res.result.files[0].id;
-  }
+  if (res.result.files.length > 0) return res.result.files[0].id;
+
   // Create new file
   let createRes = await gapi.client.request({
     path: "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
     method: "POST",
     headers: { Authorization: "Bearer " + accessToken },
-    body: JSON.stringify({
-      name: FILE_NAME,
-      mimeType: "application/json",
-    }),
+    body: JSON.stringify({ name: FILE_NAME, mimeType: "application/json" }),
   });
   return createRes.result.id;
 }
@@ -97,13 +91,14 @@ async function loadData() {
   });
 }
 
-// ------------------ APP LOGIC (same as before, but saveToDrive) ------------------
+// ------------------ APP LOGIC ------------------
 window.onload = function () {
   const dateInput = document.getElementById("date");
   const today = new Date();
   dateInput.value = today.toISOString().split("T")[0];
   document.getElementById("inputDate").classList.remove("hidden");
   initGoogleAPI();
+  hideInputs();
 };
 
 function setEntryType(type) {
@@ -189,4 +184,27 @@ function resetForm() {
   document.getElementById("source").value = "";
   document.getElementById("notes").value = "";
   document.getElementById("date").value = new Date().toISOString().split("T")[0];
+  hideInputs();
 }
+
+// ------------------ Progressive Reveal ------------------
+function hideInputs() {
+  document.getElementById("inputAmount").classList.add("hidden");
+  document.getElementById("inputNotes").classList.add("hidden");
+  document.getElementById("inputSource").classList.add("hidden");
+}
+function showInput(id) {
+  document.getElementById(id).classList.remove("hidden");
+}
+
+document.getElementById("title").addEventListener("input", function () {
+  if (this.value.trim() !== "") showInput("inputAmount");
+});
+
+document.getElementById("amount").addEventListener("input", function () {
+  if (this.value > 0) showInput("inputSource");
+});
+
+document.getElementById("source").addEventListener("change", function () {
+  showInput("inputNotes");
+});
