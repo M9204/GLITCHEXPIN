@@ -17,12 +17,11 @@
 <div class="container">
   <h1>Expense and Income Tracker</h1>
 
-  <!-- Google login -->
-  <div id="authContainer">
-    <button id="loginBtn">Sign in with Google</button>
-    <button id="logoutBtn" class="hidden">Sign out</button>
-    <span id="userInfo"></span>
-  </div>
+  <div id="auth-section">
+  <button id="loginBtn">Login with Google</button>
+  <button id="logoutBtn" style="display:none;">Logout</button>
+</div>
+
 
   <!-- Totals -->
   <div class="totals">
@@ -89,6 +88,8 @@
     </table>
   </div>
 </div>
+<script src="https://apis.google.com/js/api.js" onload="gapiLoaded()" async defer></script>
+<script src="https://accounts.google.com/gsi/client" onload="gisLoaded()" async defer></script>
 
 <script src="./script.js"></script>
 </body>
