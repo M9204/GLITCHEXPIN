@@ -1,175 +1,226 @@
-// ================== CONFIG ==================
-const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
-const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
-const SCOPES = "https://www.googleapis.com/auth/drive.file";
+/*******************************
+ Google Drive JSON Save/Load
+*******************************/
+
+const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; // put your OAuth client ID here
+const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ"; // put your API key here
 const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ"; // your folder
-const FILE_NAME = "FinanceEntries.json"; // single fixed file
-// ============================================
+const FILE_NAME = "finance-data.json"; // single JSON file name
 
-let entries = [];
-let currentFileId = null;
+const SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata";
 
-// ================== GOOGLE DRIVE AUTH ==================
-function handleClientLoad() {
-  gapi.load("client:auth2", initClient);
+let tokenClient;
+let gapiInited = false;
+let gisInited = false;
+let fileId = null; // will store ID of the finance-data.json file
+
+/*******************************
+ Load GAPI
+*******************************/
+function gapiLoaded() {
+  gapi.load("client", initializeGapiClient);
 }
 
-function initClient() {
-  gapi.client
-    .init({
-      apiKey: API_KEY,
-      clientId: CLIENT_ID,
-      discoveryDocs: [
-        "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
-      ],
-      scope: SCOPES,
-    })
-    .then(() => {
-      const authInstance = gapi.auth2.getAuthInstance();
-      authInstance.isSignedIn.listen(updateSigninStatus);
-      updateSigninStatus(authInstance.isSignedIn.get());
-    });
+async function initializeGapiClient() {
+  await gapi.client.init({
+    apiKey: API_KEY,
+    discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+  });
+  gapiInited = true;
+  maybeEnableButtons();
 }
 
-function updateSigninStatus(isSignedIn) {
-  if (isSignedIn) {
-    loadOrCreateFile();
-  } else {
-    gapi.auth2.getAuthInstance().signIn();
+/*******************************
+ Init Google Identity
+*******************************/
+function gisLoaded() {
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID,
+    scope: SCOPES,
+    callback: "", 
+  });
+  gisInited = true;
+  maybeEnableButtons();
+}
+
+function maybeEnableButtons() {
+  if (gapiInited && gisInited) {
+    document.getElementById("authorize_button").style.display = "block";
   }
 }
 
-// ================== DRIVE FILE HANDLING ==================
-async function loadOrCreateFile() {
-  try {
-    // 🔎 search file in folder
-    const res = await gapi.client.drive.files.list({
-      q: `'${FOLDER_ID}' in parents and name='${FILE_NAME}' and trashed=false`,
-      fields: "files(id, name)",
-    });
-
-    if (res.result.files && res.result.files.length > 0) {
-      currentFileId = res.result.files[0].id;
-      console.log("Found file:", currentFileId);
-      await loadEntries();
-    } else {
-      console.log("File not found, creating new one...");
-      await createFile();
+function handleAuthClick() {
+  tokenClient.callback = async (resp) => {
+    if (resp.error !== undefined) {
+      throw resp;
     }
-  } catch (err) {
-    console.error("Error loading/creating file:", err);
+    document.getElementById("signout_button").style.display = "block";
+    await ensureSingleFile();
+    await loadData();
+  };
+
+  if (gapi.client.getToken() === null) {
+    tokenClient.requestAccessToken({ prompt: "consent" });
+  } else {
+    tokenClient.requestAccessToken({ prompt: "" });
   }
 }
 
-async function createFile() {
-  try {
-    const fileMetadata = {
+function handleSignoutClick() {
+  const token = gapi.client.getToken();
+  if (token !== null) {
+    google.accounts.oauth2.revoke(token.access_token);
+    gapi.client.setToken("");
+    document.getElementById("signout_button").style.display = "none";
+  }
+}
+
+/*******************************
+ Ensure Only One File
+*******************************/
+async function ensureSingleFile() {
+  const res = await gapi.client.drive.files.list({
+    q: `'${FOLDER_ID}' in parents and name='${FILE_NAME}' and trashed=false`,
+    fields: "files(id, name)",
+  });
+
+  if (res.result.files && res.result.files.length > 0) {
+    fileId = res.result.files[0].id;
+  } else {
+    // create new file
+    const metadata = {
       name: FILE_NAME,
       mimeType: "application/json",
       parents: [FOLDER_ID],
     };
+    const fileContent = JSON.stringify([]);
+    const boundary = "-------314159265358979323846";
+    const delimiter = "\r\n--" + boundary + "\r\n";
+    const closeDelim = "\r\n--" + boundary + "--";
 
-    const fileContent = new Blob([JSON.stringify([])], {
-      type: "application/json",
+    const body =
+      delimiter +
+      "Content-Type: application/json\r\n\r\n" +
+      JSON.stringify(metadata) +
+      delimiter +
+      "Content-Type: application/json\r\n\r\n" +
+      fileContent +
+      closeDelim;
+
+    const createRes = await gapi.client.request({
+      path: "/upload/drive/v3/files?uploadType=multipart",
+      method: "POST",
+      params: { uploadType: "multipart" },
+      headers: {
+        "Content-Type": 'multipart/related; boundary="' + boundary + '"',
+      },
+      body: body,
     });
 
-    const form = new FormData();
-    form.append(
-      "metadata",
-      new Blob([JSON.stringify(fileMetadata)], { type: "application/json" })
-    );
-    form.append("file", fileContent);
-
-    const res = await fetch(
-      "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-      {
-        method: "POST",
-        headers: new Headers({
-          Authorization: "Bearer " + gapi.auth.getToken().access_token,
-        }),
-        body: form,
-      }
-    );
-
-    const file = await res.json();
-    currentFileId = file.id;
-    entries = [];
-    console.log("Created new file:", currentFileId);
-  } catch (err) {
-    console.error("Error creating file:", err);
+    fileId = createRes.result.id;
   }
 }
 
-async function loadEntries() {
-  try {
-    const res = await gapi.client.drive.files.get({
-      fileId: currentFileId,
-      alt: "media",
-    });
+/*******************************
+ Save Data
+*******************************/
+async function saveData(data) {
+  if (!fileId) await ensureSingleFile();
 
-    entries = res.result;
-    if (!Array.isArray(entries)) entries = [];
-    console.log("Loaded entries:", entries);
-    renderEntries();
-  } catch (err) {
-    console.error("Error loading entries:", err);
-  }
+  const boundary = "-------314159265358979323846";
+  const delimiter = "\r\n--" + boundary + "\r\n";
+  const closeDelim = "\r\n--" + boundary + "--";
+
+  const metadata = {
+    name: FILE_NAME,
+    mimeType: "application/json",
+  };
+
+  const body =
+    delimiter +
+    "Content-Type: application/json\r\n\r\n" +
+    JSON.stringify(metadata) +
+    delimiter +
+    "Content-Type: application/json\r\n\r\n" +
+    JSON.stringify(data) +
+    closeDelim;
+
+  await gapi.client.request({
+    path: "/upload/drive/v3/files/" + fileId,
+    method: "PATCH",
+    params: { uploadType: "multipart" },
+    headers: {
+      "Content-Type": 'multipart/related; boundary="' + boundary + '"',
+    },
+    body: body,
+  });
 }
 
-async function saveEntries() {
-  if (!currentFileId) {
-    console.error("No file to update!");
-    return;
-  }
-
-  try {
-    const fileContent = new Blob([JSON.stringify(entries)], {
-      type: "application/json",
-    });
-
-    const form = new FormData();
-    form.append(
-      "metadata",
-      new Blob(
-        [JSON.stringify({ name: FILE_NAME, mimeType: "application/json" })],
-        { type: "application/json" }
-      )
-    );
-    form.append("file", fileContent);
-
-    await fetch(
-      `https://www.googleapis.com/upload/drive/v3/files/${currentFileId}?uploadType=multipart`,
-      {
-        method: "PATCH",
-        headers: new Headers({
-          Authorization: "Bearer " + gapi.auth.getToken().access_token,
-        }),
-        body: form,
-      }
-    );
-
-    console.log("✅ Data saved to Google Drive");
-  } catch (err) {
-    console.error("Error saving entries:", err);
-  }
+/*******************************
+ Load Data
+*******************************/
+async function loadData() {
+  if (!fileId) await ensureSingleFile();
+  const res = await gapi.client.drive.files.get({
+    fileId: fileId,
+    alt: "media",
+  });
+  const data = res.result || [];
+  renderTable(data);
 }
 
-// ================== APP LOGIC ==================
-function addEntry(entry) {
-  entry.id = Date.now();
-  entries.push(entry);
-  renderEntries();
-  saveEntries();
+/*******************************
+ UI Functions (example)
+*******************************/
+function addEntry() {
+  const title = document.getElementById("title").value;
+  const amount = parseFloat(document.getElementById("amount").value);
+  const source = document.getElementById("source").value;
+  const notes = document.getElementById("notes").value;
+  const date = document.getElementById("date").value;
+
+  const entry = {
+    id: Date.now(),
+    type: "income",
+    title,
+    amount,
+    source,
+    notes,
+    date,
+    status: "",
+  };
+
+  loadData().then((data) => {
+    data.push(entry);
+    saveData(data);
+    renderTable(data);
+  });
 }
 
-function renderEntries() {
-  const list = document.getElementById("entriesList");
-  if (!list) return;
-  list.innerHTML = "";
+async function deleteEntry(id) {
+  const res = await gapi.client.drive.files.get({
+    fileId: fileId,
+    alt: "media",
+  });
+  let data = res.result || [];
+  data = data.filter((e) => e.id !== id);
+  await saveData(data);
+  renderTable(data);
+}
 
-  entries.forEach((e) => {
-    const li = document.createElement("li");
-    li.textContent = `${e.type.toUpperCase()} - ${e.title}: ${e.amount}`;
-    list.appendChild(li);
+function renderTable(data) {
+  const table = document.getElementById("dataTable");
+  table.innerHTML = "";
+  data.forEach((row) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row.title}</td>
+      <td>${row.amount}</td>
+      <td>${row.source}</td>
+      <td>${row.notes}</td>
+      <td>${row.date}</td>
+      <td><button onclick="deleteEntry(${row.id})">Delete</button></td>
+    `;
+    table.appendChild(tr);
   });
 }
