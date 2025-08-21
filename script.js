@@ -1,6 +1,6 @@
 // ================== CONFIG ==================
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
-const API_KEY = "YOUR_API_KEY";
+const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
 const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ"; // your folder
 const FILE_NAME = "FinanceEntries.json"; // single fixed file
