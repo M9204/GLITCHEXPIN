@@ -5,22 +5,27 @@ let totalExpenses = 0;
 let currentFileId = null; // single file to store data
 const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ";
 const FILE_NAME = "ExpenseIncomeData.json";
+console.log('script.js is loaded!');
 
-let entries = [];
+let totalIncome = 0;
+let totalExpenses = 0;
+let entries = []; // all entries
+let currentFileId = null; // Google Drive file ID
 
-// Google API credentials
+// Google Drive config
+const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ";
+const FILE_NAME = "ExpenseIncomeData.json";
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
-const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ"; // get from Google Cloud Console
+const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
 const SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata";
 
 window.onload = function () {
   const dateInput = document.getElementById('date');
   const today = new Date();
-  const formattedDate = today.toISOString().split('T')[0];
-  dateInput.value = formattedDate;
+  dateInput.value = today.toISOString().split('T')[0];
   document.getElementById('inputDate').classList.remove('hidden');
 
-  initGoogleDrive(); // load Drive API
+  initGoogleDrive(); // Initialize Google Drive API
 };
 
 // ================= GOOGLE DRIVE ================= //
@@ -44,8 +49,9 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     document.getElementById("loginBtn").classList.add("hidden");
     document.getElementById("logoutBtn").classList.remove("hidden");
-    document.getElementById("userInfo").textContent = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
-    findOrCreateFile(); // load or create file
+    document.getElementById("userInfo").textContent =
+      gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
+    findOrCreateFile();
   } else {
     document.getElementById("loginBtn").classList.remove("hidden");
     document.getElementById("logoutBtn").classList.add("hidden");
@@ -75,12 +81,14 @@ async function findOrCreateFile() {
     form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
     form.append("file", file);
 
-    const uploadRes = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
-      method: "POST",
-      headers: new Headers({ Authorization: "Bearer " + gapi.auth.getToken().access_token }),
-      body: form,
-    });
-
+    const uploadRes = await fetch(
+      "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+      {
+        method: "POST",
+        headers: { Authorization: "Bearer " + gapi.auth.getToken().access_token },
+        body: form,
+      }
+    );
     const result = await uploadRes.json();
     currentFileId = result.id;
     console.log("Created new file:", currentFileId);
@@ -98,7 +106,7 @@ async function saveDataToDrive() {
 
   await fetch(`https://www.googleapis.com/upload/drive/v3/files/${currentFileId}?uploadType=multipart`, {
     method: "PATCH",
-    headers: new Headers({ Authorization: "Bearer " + gapi.auth.getToken().access_token }),
+    headers: { Authorization: "Bearer " + gapi.auth.getToken().access_token },
     body: form,
   });
 
@@ -107,14 +115,10 @@ async function saveDataToDrive() {
 
 async function loadDataFromDrive() {
   if (!currentFileId) return;
-  const res = await gapi.client.drive.files.get({
-    fileId: currentFileId,
-    alt: "media",
-  });
+  const res = await gapi.client.drive.files.get({ fileId: currentFileId, alt: "media" });
   entries = res.body ? JSON.parse(res.body) : [];
   console.log("📂 Loaded entries:", entries);
 
-  // reset table + totals
   document.getElementById("entriesTableBody").innerHTML = "";
   totalIncome = 0; totalExpenses = 0;
 
@@ -122,6 +126,29 @@ async function loadDataFromDrive() {
     addRowToTable(entry.type, entry.title, entry.amount, entry.source, entry.notes, entry.date, entry.id, entry.status);
   });
 }
+
+// ================= APP LOGIC (original functions unchanged) ================= //
+function setEntryType(type) {
+  const title = document.getElementById('title').value;
+  const amount = parseFloat(document.getElementById('amount').value);
+  const source = document.getElementById('source').value;
+  const notes = document.getElementById('notes').value;
+  const date = document.getElementById('date').value;
+
+  if (isNaN(amount) || amount <= 0 || title.trim() === '') {
+    alert("Please enter a valid title and amount.");
+    return;
+  }
+
+  const entryData = { id: Date.now(), type, title, amount, source, notes, date, status: "" };
+
+  entries.push(entryData);
+  addRowToTable(type, title, amount, source, notes, date, entryData.id, entryData.status);
+  saveDataToDrive();
+  resetForm();
+}
+
+// All your previous functions like addRowToTable, hideInputs, exportToExcel, resetForm, updateRowBackgroundColor remain unchanged
 
 // ================= APP LOGIC (unchanged) ================= //
 function setEntryType(type) {
