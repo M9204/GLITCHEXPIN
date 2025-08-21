@@ -1,22 +1,18 @@
-/*******************************
- Google Drive JSON Save/Load
-*******************************/
+// ===================== CONFIG =====================
+const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; 
+const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ"; // from Google Cloud Console
+const SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata.readonly";
+const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ"; // Your folder
+const FILE_NAME = "FinanceData.json"; // Single fixed file
 
-const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com"; // put your OAuth client ID here
-const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ"; // put your API key here
-const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ"; // your folder
-const FILE_NAME = "finance-data.json"; // single JSON file name
-
-const SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata";
-
+// ===================== GLOBALS =====================
 let tokenClient;
 let gapiInited = false;
 let gisInited = false;
-let fileId = null; // will store ID of the finance-data.json file
+let fileId = null;
+let entries = [];
 
-/*******************************
- Load GAPI
-*******************************/
+// ===================== INIT =====================
 function gapiLoaded() {
   gapi.load("client", initializeGapiClient);
 }
@@ -30,9 +26,6 @@ async function initializeGapiClient() {
   maybeEnableButtons();
 }
 
-/*******************************
- Init Google Identity
-*******************************/
 function gisLoaded() {
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
@@ -45,20 +38,18 @@ function gisLoaded() {
 
 function maybeEnableButtons() {
   if (gapiInited && gisInited) {
-    document.getElementById("authorize_button").style.display = "block";
+    document.getElementById("signin_button").style.display = "block";
   }
 }
 
+// ===================== AUTH =====================
 function handleAuthClick() {
   tokenClient.callback = async (resp) => {
-    if (resp.error !== undefined) {
-      throw resp;
-    }
+    if (resp.error !== undefined) throw resp;
     document.getElementById("signout_button").style.display = "block";
-    await ensureSingleFile();
-    await loadData();
+    document.getElementById("signin_button").style.display = "none";
+    await loadDataFromDrive();
   };
-
   if (gapi.client.getToken() === null) {
     tokenClient.requestAccessToken({ prompt: "consent" });
   } else {
@@ -71,156 +62,145 @@ function handleSignoutClick() {
   if (token !== null) {
     google.accounts.oauth2.revoke(token.access_token);
     gapi.client.setToken("");
+    document.getElementById("signin_button").style.display = "block";
     document.getElementById("signout_button").style.display = "none";
   }
 }
 
-/*******************************
- Ensure Only One File
-*******************************/
-async function ensureSingleFile() {
+// ===================== DRIVE OPS =====================
+// Find or create the single JSON file
+async function getOrCreateFile() {
+  if (fileId) return fileId;
+
+  const query = `'${FOLDER_ID}' in parents and name='${FILE_NAME}' and trashed=false`;
   const res = await gapi.client.drive.files.list({
-    q: `'${FOLDER_ID}' in parents and name='${FILE_NAME}' and trashed=false`,
+    q: query,
     fields: "files(id, name)",
   });
 
   if (res.result.files && res.result.files.length > 0) {
     fileId = res.result.files[0].id;
-  } else {
-    // create new file
-    const metadata = {
-      name: FILE_NAME,
-      mimeType: "application/json",
-      parents: [FOLDER_ID],
-    };
-    const fileContent = JSON.stringify([]);
-    const boundary = "-------314159265358979323846";
-    const delimiter = "\r\n--" + boundary + "\r\n";
-    const closeDelim = "\r\n--" + boundary + "--";
+    return fileId;
+  }
 
-    const body =
-      delimiter +
-      "Content-Type: application/json\r\n\r\n" +
-      JSON.stringify(metadata) +
-      delimiter +
-      "Content-Type: application/json\r\n\r\n" +
-      fileContent +
-      closeDelim;
+  // Create if not found
+  const fileMetadata = {
+    name: FILE_NAME,
+    mimeType: "application/json",
+    parents: [FOLDER_ID],
+  };
+  const createRes = await gapi.client.drive.files.create({
+    resource: fileMetadata,
+    fields: "id",
+  });
+  fileId = createRes.result.id;
 
-    const createRes = await gapi.client.request({
-      path: "/upload/drive/v3/files?uploadType=multipart",
-      method: "POST",
-      params: { uploadType: "multipart" },
-      headers: {
-        "Content-Type": 'multipart/related; boundary="' + boundary + '"',
-      },
-      body: body,
+  // Initialize with empty array
+  await updateFile([]);
+  return fileId;
+}
+
+// Load data from Drive
+async function loadDataFromDrive() {
+  try {
+    const id = await getOrCreateFile();
+    const res = await gapi.client.drive.files.get({
+      fileId: id,
+      alt: "media",
     });
-
-    fileId = createRes.result.id;
+    entries = res.body ? JSON.parse(res.body) : [];
+    renderEntries();
+    console.log("Data loaded from Drive");
+  } catch (err) {
+    console.error("Error loading file:", err);
   }
 }
 
-/*******************************
- Save Data
-*******************************/
-async function saveData(data) {
-  if (!fileId) await ensureSingleFile();
-
+// Update (overwrite) file in Drive
+async function updateFile(data) {
+  if (!fileId) await getOrCreateFile();
   const boundary = "-------314159265358979323846";
   const delimiter = "\r\n--" + boundary + "\r\n";
-  const closeDelim = "\r\n--" + boundary + "--";
+  const close_delim = "\r\n--" + boundary + "--";
 
   const metadata = {
     name: FILE_NAME,
     mimeType: "application/json",
   };
 
-  const body =
+  const multipartRequestBody =
     delimiter +
     "Content-Type: application/json\r\n\r\n" +
     JSON.stringify(metadata) +
     delimiter +
     "Content-Type: application/json\r\n\r\n" +
     JSON.stringify(data) +
-    closeDelim;
+    close_delim;
 
   await gapi.client.request({
     path: "/upload/drive/v3/files/" + fileId,
     method: "PATCH",
     params: { uploadType: "multipart" },
     headers: {
-      "Content-Type": 'multipart/related; boundary="' + boundary + '"',
+      "Content-Type": "multipart/related; boundary=" + boundary,
     },
-    body: body,
+    body: multipartRequestBody,
   });
+
+  console.log("Data synced with Google Drive");
 }
 
-/*******************************
- Load Data
-*******************************/
-async function loadData() {
-  if (!fileId) await ensureSingleFile();
-  const res = await gapi.client.drive.files.get({
-    fileId: fileId,
-    alt: "media",
-  });
-  const data = res.result || [];
-  renderTable(data);
+// ===================== APP LOGIC =====================
+function setEntryType(type) {
+  document.getElementById("entryType").value = type;
 }
 
-/*******************************
- UI Functions (example)
-*******************************/
 function addEntry() {
+  const type = document.getElementById("entryType").value;
   const title = document.getElementById("title").value;
   const amount = parseFloat(document.getElementById("amount").value);
   const source = document.getElementById("source").value;
   const notes = document.getElementById("notes").value;
   const date = document.getElementById("date").value;
+  const status = document.getElementById("status").value;
+
+  if (!title || isNaN(amount)) {
+    alert("Please enter valid data.");
+    return;
+  }
 
   const entry = {
     id: Date.now(),
-    type: "income",
+    type,
     title,
     amount,
     source,
     notes,
     date,
-    status: "",
+    status,
   };
 
-  loadData().then((data) => {
-    data.push(entry);
-    saveData(data);
-    renderTable(data);
-  });
+  entries.push(entry);
+  updateFile(entries);
+  renderEntries();
+  clearForm();
 }
 
-async function deleteEntry(id) {
-  const res = await gapi.client.drive.files.get({
-    fileId: fileId,
-    alt: "media",
-  });
-  let data = res.result || [];
-  data = data.filter((e) => e.id !== id);
-  await saveData(data);
-  renderTable(data);
+function clearForm() {
+  document.getElementById("title").value = "";
+  document.getElementById("amount").value = "";
+  document.getElementById("source").value = "";
+  document.getElementById("notes").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("status").value = "";
 }
 
-function renderTable(data) {
-  const table = document.getElementById("dataTable");
-  table.innerHTML = "";
-  data.forEach((row) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${row.title}</td>
-      <td>${row.amount}</td>
-      <td>${row.source}</td>
-      <td>${row.notes}</td>
-      <td>${row.date}</td>
-      <td><button onclick="deleteEntry(${row.id})">Delete</button></td>
-    `;
-    table.appendChild(tr);
+function renderEntries() {
+  const list = document.getElementById("entriesList");
+  list.innerHTML = "";
+  entries.forEach((entry) => {
+    const li = document.createElement("li");
+    li.textContent = `${entry.type.toUpperCase()}: ${entry.title} - ${entry.amount} (${entry.date})`;
+    list.appendChild(li);
   });
 }
