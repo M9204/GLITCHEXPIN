@@ -25,6 +25,7 @@ function setEntryType(type) {
   const source = document.getElementById('source').value;
   const notes = document.getElementById('notes').value;
   const date = document.getElementById('date').value;
+  saveDataToDrive();
 
   if (isNaN(amount) || amount <= 0 || title.trim() === '') {
     alert("Please enter a valid title and amount.");
@@ -290,6 +291,8 @@ function saveStatusToServer(id, status) {
   .catch(error => {
     console.error('Error updating status:', error);
   });
+  saveDataToDrive();
+
 }
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
 const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
