@@ -5,7 +5,7 @@ let accessToken = null;
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
 const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
-const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ"; // your folder
+const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ";
 
 let entries = []; // local cache
 
@@ -105,7 +105,7 @@ function setEntryType(type) {
   let entry = {
     date: document.getElementById("date").value,
     title: document.getElementById("title").value,
-    amount: parseFloat(document.getElementById("amount").value),
+    amount: parseFloat(document.getElementById("amount").value || 0),
     source: document.getElementById("source").value,
     status: type,
     notes: document.getElementById("notes").value,
