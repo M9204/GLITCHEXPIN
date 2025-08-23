@@ -21,6 +21,7 @@ async function initializeGapiClient() {
   });
   gapiInited = true;
   maybeEnableButtons();
+  if (accessToken) loadDataFromDrive(); // load immediately if token exists
 }
 
 function gisLoaded() {
@@ -30,7 +31,10 @@ function gisLoaded() {
     callback: (resp) => {
       if (resp.error !== undefined) throw resp;
       accessToken = resp.access_token;
+      localStorage.setItem("accessToken", accessToken); // persist token
       loadDataFromDrive();
+      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("logoutBtn").style.display = "inline";
     },
   });
   gisInited = true;
@@ -41,13 +45,13 @@ function maybeEnableButtons() {
   if (gapiInited && gisInited) {
     document.getElementById("loginBtn").onclick = () => {
       tokenClient.requestAccessToken({ prompt: "consent" });
-      document.getElementById("loginBtn").style.display = "none";
-      document.getElementById("logoutBtn").style.display = "inline";
     };
     document.getElementById("logoutBtn").onclick = () => {
       google.accounts.oauth2.revoke(accessToken, () => {
         entries = [];
         renderTable();
+        accessToken = null;
+        localStorage.removeItem("accessToken");
         document.getElementById("loginBtn").style.display = "inline";
         document.getElementById("logoutBtn").style.display = "none";
       });
