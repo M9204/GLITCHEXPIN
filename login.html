@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h1>Login</h1>
+  <div id="g_id_onload"
+       data-client_id="YOUR_CLIENT_ID.apps.googleusercontent.com"
+       data-login_uri="main.html"
+       data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="signin_with"
+       data-shape="rectangular"
+       data-logo_alignment="left">
+  </div>
+
+  <script>
+    // If user already logged in, redirect immediately
+    const user = localStorage.getItem("user");
+    if (user) {
+      window.location.href = "main.html";
+    }
+
+    function handleCredentialResponse(response) {
+      const data = jwt_decode(response.credential);
+      localStorage.setItem("user", JSON.stringify(data));
+      window.location.href = "main.html"; // redirect after login
+    }
+
+    window.onload = () => {
+      google.accounts.id.initialize({
+        client_id: "YOUR_CLIENT_ID.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+        auto_select: true
+      });
+      google.accounts.id.prompt(); // optional silent login
+    };
+  </script>
+</body>
+</html>
