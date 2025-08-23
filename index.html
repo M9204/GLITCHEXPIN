@@ -1,14 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Expense and Income Tracker</title>
-<link rel="stylesheet" href="./public/style.css">
 
 <!-- XLSX -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #f4f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222;
+  }
+  .totals {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+  }
+  .totals span {
+    font-weight: bold;
+  }
+  .green { color: green; }
+  .red { color: red; }
+
+  .form-container {
+    margin-bottom: 30px;
+  }
+  .form-group {
+    margin-bottom: 12px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    max-width: 400px;
+  }
+  .form-group.active {
+    opacity: 1;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    box-sizing: border-box;
+  }
+  textarea {
+    resize: vertical;
+  }
+  .buttons button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  .buttons button:hover {
+    background: #0056b3;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  table th {
+    background: #f0f0f0;
+  }
+</style>
 </head>
 <body>
 <div class="container">
@@ -29,22 +116,19 @@
 
   <!-- Form -->
   <div class="form-container">
-    <div class="form-group">
+    <div class="form-group" id="inputTitle">
       <label>Title:</label>
       <input type="text" id="title" placeholder="Enter Title">
     </div>
-
-    <div class="form-group">
+    <div class="form-group" id="inputDate">
       <label>Date:</label>
       <input type="date" id="date">
     </div>
-
-    <div class="form-group">
+    <div class="form-group" id="inputAmount">
       <label>Amount:</label>
       <input type="number" id="amount" step="0.01" min="0">
     </div>
-
-    <div class="form-group">
+    <div class="form-group" id="inputSource">
       <label>Source:</label>
       <select id="source">
         <option value="">Select source</option>
@@ -53,12 +137,10 @@
         <option value="others">Others</option>
       </select>
     </div>
-
-    <div class="form-group">
+    <div class="form-group" id="inputNotes">
       <label>Notes:</label>
       <textarea id="notes" placeholder="Enter Notes"></textarea>
     </div>
-
     <div class="buttons">
       <button onclick="setEntryType('income')">Add Income</button>
       <button onclick="setEntryType('expense')">Add Expense</button>
@@ -86,46 +168,85 @@
   </div>
 </div>
 
-<!-- App logic first (defines gapiLoaded & gisLoaded) -->
-<script src="script.js"></script>
-
-<!-- Then Google APIs that will call them -->
-<script src="https://apis.google.com/js/api.js" onload="gapiLoaded()" async defer></script>
-<script src="https://accounts.google.com/gsi/client" onload="gisLoaded()" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
 <script>
-  function handleCredentialResponse(response) {
-    const data = jwt_decode(response.credential); // decode ID token
-    console.log("Signed in as:", data.email);
+  // Sequentially show inputs
+  const inputGroups = document.querySelectorAll(".form-group");
+  let currentIndex = 0;
+  function showNextInput() {
+    if (currentIndex < inputGroups.length) {
+      inputGroups[currentIndex].classList.add("active");
+      currentIndex++;
+    }
+  }
+  // Show first input on page load
+  window.onload = () => { showNextInput(); };
 
-    // ✅ Save user info in localStorage
-    localStorage.setItem("user", JSON.stringify(data));
+  inputGroups.forEach(input => {
+    input.querySelectorAll("input, select, textarea").forEach(el => {
+      el.addEventListener("input", () => {
+        showNextInput();
+      });
+    });
+  });
 
-    showApp(data);
+  // Mock entries and table functions for demo
+  let entries = [];
+
+  function setEntryType(type){
+    let entry = {
+      date: document.getElementById("date").value,
+      title: document.getElementById("title").value,
+      amount: parseFloat(document.getElementById("amount").value || 0),
+      source: document.getElementById("source").value,
+      status: type,
+      notes: document.getElementById("notes").value
+    };
+    entries.push(entry);
+    renderTable();
+    resetForm();
+    currentIndex = 0;
+    inputGroups.forEach(f => f.classList.remove("active"));
+    showNextInput();
   }
 
-  window.onload = function () {
-    google.accounts.id.initialize({
-      client_id: "YOUR_CLIENT_ID.apps.googleusercontent.com",
-      callback: handleCredentialResponse,
-      auto_select: true   // ✅ silently re-selects last signed-in account
+  function renderTable(){
+    let tbody = document.getElementById("entriesTableBody");
+    tbody.innerHTML = "";
+    let totalIncome = 0, totalExpenses = 0;
+    entries.forEach(e=>{
+      let row = `<tr>
+        <td><input type="checkbox"></td>
+        <td>${e.date}</td>
+        <td>${e.title}</td>
+        <td class="${e.status==='income'?'green':'red'}">${e.amount.toFixed(2)}</td>
+        <td>${e.source}</td>
+        <td>${e.status}</td>
+        <td>${e.notes}</td>
+      </tr>`;
+      tbody.innerHTML += row;
+      if(e.status==='income') totalIncome+=e.amount;
+      if(e.status==='expense') totalExpenses+=e.amount;
     });
+    document.getElementById("totalIncome").innerText="$"+totalIncome.toFixed(2);
+    document.getElementById("totalExpenses").innerText="$"+totalExpenses.toFixed(2);
+    document.getElementById("netTotal").innerText="$"+(totalIncome-totalExpenses).toFixed(2);
+  }
 
-    // If already logged in, reload user
-    const user = localStorage.getItem("user");
-    if (user) {
-      showApp(JSON.parse(user));
-    } else {
-      google.accounts.id.prompt(); // shows login button
-    }
-  };
+  function resetForm(){
+    document.getElementById("title").value="";
+    document.getElementById("date").value="";
+    document.getElementById("amount").value="";
+    document.getElementById("source").value="";
+    document.getElementById("notes").value="";
+  }
 
-  function showApp(user) {
-    document.getElementById("app").style.display = "block";
-    document.getElementById("login").style.display = "none";
-    document.getElementById("userEmail").innerText = user.email;
+  function exportToExcel(){
+    let ws = XLSX.utils.json_to_sheet(entries);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Entries");
+    XLSX.writeFile(wb, "expenses.xlsx");
   }
 </script>
-
 </body>
 </html>
-
