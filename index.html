@@ -4,46 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Expense and Income Tracker</title>
+
 <style>
-body {
-  font-family: "Roboto", Arial, sans-serif;
-  background: #f1f3f4;
-  margin: 0; padding:0;
-}
-.container {
-  width: 90%; max-width: 900px;
-  margin: 20px auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-h1 { text-align:center; margin-bottom:20px; }
-#auth-section { text-align:center; margin-bottom:20px; }
-#auth-section button { margin:5px; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; background:#1a73e8; color:white; font-size:14px; }
-#auth-section button:hover { background:#1558b0; }
-.totals { display:flex; justify-content:space-around; margin-bottom:20px; }
-.green{color:green;} .red{color:red;}
-.form-container { margin-bottom:20px; }
-.form-group { margin:10px 0; }
-.form-group label { display:block; margin-bottom:4px; font-weight:bold; }
-.form-group input, .form-group select, .form-group textarea { width:100%; padding:8px; border-radius:6px; border:1px solid #ccc; }
-textarea{resize:vertical;}
-.buttons{margin-top:10px;}
-.buttons button{margin:5px; padding:10px 15px; border:none; border-radius:6px; cursor:pointer; background:#1a73e8;color:white;font-size:14px;}
-.buttons button:hover{background:#1558b0;}
-.table-container{overflow-x:auto;}
-table{width:100%; border-collapse:collapse;}
-table th, table td{padding:8px;border:1px solid #ddd;text-align:center;}
+body { font-family: Arial, sans-serif; background:#f4f4f4; margin:0; padding:0;}
+.container { max-width:900px; margin:auto; padding:20px; background:white; }
+h1 { text-align:center; }
+.green { color:green; }
+.red { color:red; }
+.form-group { margin-bottom:10px; }
+input, select, textarea { width:100%; padding:5px; }
+.buttons button { margin-right:5px; margin-top:5px; }
+table { width:100%; border-collapse:collapse; margin-top:20px;}
+th, td { border:1px solid #ccc; padding:5px; text-align:center;}
 </style>
 
 <!-- XLSX -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
-<!-- JWT Decode -->
+<!-- JWT decode -->
 <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
 <!-- Google APIs -->
-<script src="https://apis.google.com/js/api.js" async defer></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://apis.google.com/js/api.js" onload="gapiLoaded()" async defer></script>
+<script src="https://accounts.google.com/gsi/client" onload="gisLoaded()" async defer></script>
+
 </head>
 <body>
 <div class="container">
@@ -51,10 +33,8 @@ table th, table td{padding:8px;border:1px solid #ddd;text-align:center;}
 
   <!-- Auth -->
   <div id="auth-section">
-    <div id="login"></div>
-    <div id="user-info" style="display:none;">
-      <p>Welcome <span id="userEmail"></span> <button onclick="logout()">Logout</button></p>
-    </div>
+    <button id="loginBtn">Login with Google</button>
+    <button id="logoutBtn" style="display:none;">Logout</button>
   </div>
 
   <!-- Totals -->
@@ -65,19 +45,22 @@ table th, table td{padding:8px;border:1px solid #ddd;text-align:center;}
   </div>
 
   <!-- Form -->
-  <div class="form-container" id="app" style="display:none;">
+  <div class="form-container">
     <div class="form-group">
       <label>Title:</label>
       <input type="text" id="title" placeholder="Enter Title">
     </div>
+
     <div class="form-group">
       <label>Date:</label>
       <input type="date" id="date">
     </div>
+
     <div class="form-group">
       <label>Amount:</label>
       <input type="number" id="amount" step="0.01" min="0">
     </div>
+
     <div class="form-group">
       <label>Source:</label>
       <select id="source">
@@ -87,10 +70,12 @@ table th, table td{padding:8px;border:1px solid #ddd;text-align:center;}
         <option value="others">Others</option>
       </select>
     </div>
+
     <div class="form-group">
       <label>Notes:</label>
       <textarea id="notes" placeholder="Enter Notes"></textarea>
     </div>
+
     <div class="buttons">
       <button onclick="setEntryType('income')">Add Income</button>
       <button onclick="setEntryType('expense')">Add Expense</button>
@@ -104,7 +89,13 @@ table th, table td{padding:8px;border:1px solid #ddd;text-align:center;}
     <table>
       <thead>
         <tr>
-          <th>Select</th><th>Date</th><th>Title</th><th>Amount</th><th>Source</th><th>Status</th><th>Notes</th>
+          <th>Select</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th>Amount</th>
+          <th>Source</th>
+          <th>Status</th>
+          <th>Notes</th>
         </tr>
       </thead>
       <tbody id="entriesTableBody"></tbody>
@@ -113,102 +104,176 @@ table th, table td{padding:8px;border:1px solid #ddd;text-align:center;}
 </div>
 
 <script>
+let gapiInited = false;
+let gisInited = false;
+let tokenClient;
+let accessToken = null;
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
-const ALLOWED_USERS = ["cloudyskyqa@gmail.com"]; // put allowed users here
-let entries = [];
+const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
+const SCOPES = "https://www.googleapis.com/auth/drive.file";
+const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ";
+const ALLOWED_USERS = ["youremail@gmail.com"]; // only these emails can login
 
-function handleCredentialResponse(response){
-  const data = jwt_decode(response.credential);
-  if(!ALLOWED_USERS.includes(data.email)){ alert("Access denied"); return; }
-  localStorage.setItem("id_token", response.credential);
-  localStorage.setItem("user", JSON.stringify(data));
-  showApp(data);
+let entries = []; // local cache
+
+// ---- INIT ----
+function gapiLoaded() {
+  gapi.load("client", initializeGapiClient);
 }
 
-function showApp(user){
-  document.getElementById("app").style.display="block";
-  document.getElementById("login").style.display="none";
-  document.getElementById("user-info").style.display="block";
-  document.getElementById("userEmail").innerText=user.email;
-}
-
-function logout(){
-  localStorage.removeItem("id_token");
-  localStorage.removeItem("user");
-  document.getElementById("app").style.display="none";
-  document.getElementById("login").style.display="block";
-  document.getElementById("user-info").style.display="none";
-}
-
-window.onload = function(){
-  const user = localStorage.getItem("user");
-  if(user){ showApp(JSON.parse(user)); }
-
-  google.accounts.id.initialize({
-    client_id: CLIENT_ID,
-    callback: handleCredentialResponse,
-    auto_select: true,
-    cancel_on_tap_outside: false
+async function initializeGapiClient() {
+  await gapi.client.init({
+    apiKey: API_KEY,
+    discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
   });
-  google.accounts.id.renderButton(document.getElementById("login"), { theme:"outline", size:"large" });
-  google.accounts.id.prompt();
+  gapiInited = true;
+  maybeEnableButtons();
 }
 
-// --- App logic ---
-function setEntryType(type){
-  const entry = {
-    date:document.getElementById("date").value,
-    title:document.getElementById("title").value,
-    amount:parseFloat(document.getElementById("amount").value || 0),
-    source:document.getElementById("source").value,
-    status:type,
-    notes:document.getElementById("notes").value
+function gisLoaded() {
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID,
+    scope: SCOPES,
+    callback: (resp) => {
+      if (resp.error !== undefined) throw resp;
+      accessToken = resp.access_token;
+      localStorage.setItem("drive_token", accessToken);
+      loadDataFromDrive();
+      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("logoutBtn").style.display = "inline";
+    },
+  });
+  gisInited = true;
+  maybeEnableButtons();
+}
+
+function maybeEnableButtons() {
+  if (gapiInited && gisInited) {
+    document.getElementById("loginBtn").onclick = () => {
+      tokenClient.requestAccessToken({ prompt: "consent" });
+    };
+    document.getElementById("logoutBtn").onclick = () => {
+      google.accounts.oauth2.revoke(accessToken, () => {
+        localStorage.removeItem("drive_token");
+        entries = [];
+        renderTable();
+        document.getElementById("loginBtn").style.display = "inline";
+        document.getElementById("logoutBtn").style.display = "none";
+      });
+    };
+  }
+}
+
+// ---- DRIVE HELPERS ----
+async function findOrCreateFile() {
+  let query = `'${FOLDER_ID}' in parents and name='expenses.json'`;
+  let res = await gapi.client.drive.files.list({ q: query, fields: "files(id,name)" });
+  if (res.result.files && res.result.files.length > 0) {
+    return res.result.files[0].id;
+  }
+  // create new file
+  let fileMetadata = { name: "expenses.json", parents: [FOLDER_ID] };
+  let file = new Blob([JSON.stringify([])], { type: "application/json" });
+  let form = new FormData();
+  form.append("metadata", new Blob([JSON.stringify(fileMetadata)], { type: "application/json" }));
+  form.append("file", file);
+
+  let upload = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + accessToken },
+    body: form,
+  });
+  let data = await upload.json();
+  return data.id;
+}
+
+async function saveToDrive() {
+  let fileId = await findOrCreateFile();
+  let form = new FormData();
+  form.append("metadata", new Blob([JSON.stringify({})], { type: "application/json" }));
+  form.append("file", new Blob([JSON.stringify(entries)], { type: "application/json" }));
+
+  await fetch(`https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=multipart`, {
+    method: "PATCH",
+    headers: { Authorization: "Bearer " + accessToken },
+    body: form,
+  });
+}
+
+async function loadDataFromDrive() {
+  let fileId = await findOrCreateFile();
+  let res = await gapi.client.drive.files.get({
+    fileId: fileId,
+    alt: "media",
+  });
+  entries = res.body ? JSON.parse(res.body) : [];
+  renderTable();
+}
+
+// ---- APP LOGIC ----
+function setEntryType(type) {
+  let entry = {
+    date: document.getElementById("date").value,
+    title: document.getElementById("title").value,
+    amount: parseFloat(document.getElementById("amount").value || 0),
+    source: document.getElementById("source").value,
+    status: type,
+    notes: document.getElementById("notes").value,
   };
   entries.push(entry);
-  localStorage.setItem("entries", JSON.stringify(entries));
+  saveToDrive();
   renderTable();
   resetForm();
 }
 
-function renderTable(){
-  const tbody=document.getElementById("entriesTableBody");
-  tbody.innerHTML="";
-  let totalIncome=0,totalExpenses=0;
-  entries.forEach(e=>{
-    tbody.innerHTML+=`<tr>
+function renderTable() {
+  let tbody = document.getElementById("entriesTableBody");
+  tbody.innerHTML = "";
+  let totalIncome = 0, totalExpenses = 0;
+  entries.forEach((e) => {
+    let row = `<tr>
       <td><input type="checkbox"></td>
-      <td>${e.date}</td><td>${e.title}</td><td>${e.amount.toFixed(2)}</td>
-      <td>${e.source}</td><td>${e.status}</td><td>${e.notes}</td>
+      <td>${e.date}</td>
+      <td>${e.title}</td>
+      <td>${e.amount.toFixed(2)}</td>
+      <td>${e.source}</td>
+      <td>${e.status}</td>
+      <td>${e.notes}</td>
     </tr>`;
-    if(e.status==="income") totalIncome+=e.amount;
-    else if(e.status==="expense") totalExpenses+=e.amount;
+    tbody.innerHTML += row;
+    if (e.status === "income") totalIncome += e.amount;
+    if (e.status === "expense") totalExpenses += e.amount;
   });
-  document.getElementById("totalIncome").innerText="$"+totalIncome.toFixed(2);
-  document.getElementById("totalExpenses").innerText="$"+totalExpenses.toFixed(2);
-  document.getElementById("netTotal").innerText="$"+(totalIncome-totalExpenses).toFixed(2);
+  document.getElementById("totalIncome").innerText = "$" + totalIncome.toFixed(2);
+  document.getElementById("totalExpenses").innerText = "$" + totalExpenses.toFixed(2);
+  document.getElementById("netTotal").innerText = "$" + (totalIncome - totalExpenses).toFixed(2);
 }
 
-function resetForm(){
-  document.getElementById("title").value="";
-  document.getElementById("date").value="";
-  document.getElementById("amount").value="";
-  document.getElementById("source").value="";
-  document.getElementById("notes").value="";
+function resetForm() {
+  document.getElementById("title").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("amount").value = "";
+  document.getElementById("source").value = "";
+  document.getElementById("notes").value = "";
 }
 
-function exportToExcel(){
-  let ws=XLSX.utils.json_to_sheet(entries);
-  let wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,ws,"Entries");
-  XLSX.writeFile(wb,"expenses.xlsx");
+function exportToExcel() {
+  let ws = XLSX.utils.json_to_sheet(entries);
+  let wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Entries");
+  XLSX.writeFile(wb, "expenses.xlsx");
 }
 
-// Load entries from localStorage on refresh
-window.addEventListener("load",()=>{
-  const saved = localStorage.getItem("entries");
-  if(saved){ entries = JSON.parse(saved); renderTable(); }
-});
+// ---- AUTO LOGIN ON REFRESH ----
+window.onload = () => {
+  const token = localStorage.getItem("drive_token");
+  if (token) {
+    accessToken = token;
+    loadDataFromDrive();
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "inline";
+  }
+};
 </script>
-
 </body>
 </html>
