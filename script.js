@@ -47,14 +47,31 @@ function requestToken() {
   tokenClient.requestAccessToken({ prompt: "" }); // silent request
 }
 
-window.onload = function() {
-  // Wait a bit to let GIS fully initialize
-  setTimeout(() => {
-    if (localStorage.getItem("tokenRequested") === "true") {
-      requestToken();
+window.onload = async function() {
+  const user = JSON.parse(localStorage.getItem("user") || null);
+  accessToken = localStorage.getItem("accessToken") || null;
+
+  if (user && accessToken) {
+    // Show app immediately
+    showApp(user);
+    // Try loading data silently
+    if (gapiInited) {
+      await loadDataFromDrive().catch(() => {
+        // If token expired, request new one
+        requestToken();
+      });
     }
-  }, 500); // 0.5s delay
+  }
+
+  // Initialize Google APIs
+  google.accounts.id.initialize({
+    client_id: CLIENT_ID,
+    callback: handleCredentialResponse,
+    auto_select: true
+  });
+  google.accounts.id.prompt(); // Only shows login if no user
 };
+
 
 function maybeEnableButtons() {
   if (gapiInited && gisInited) {
