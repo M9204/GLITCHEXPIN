@@ -1,8 +1,7 @@
-
 let gapiInited = false;
 let gisInited = false;
 let tokenClient;
-let accessToken = null;
+let accessToken = localStorage.getItem("accessToken") || null; // persist token
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
 const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
@@ -14,6 +13,7 @@ let entries = []; // local cache
 function gapiLoaded() {
   gapi.load("client", initializeGapiClient);
 }
+
 async function initializeGapiClient() {
   await gapi.client.init({
     apiKey: API_KEY,
@@ -24,21 +24,21 @@ async function initializeGapiClient() {
   if (accessToken) loadDataFromDrive(); // load immediately if token exists
 }
 
-// Initialize GIS token client
 function gisLoaded() {
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
     callback: (resp) => {
-      if (resp.error) {
-        console.error(resp.error);
-        return;
-      }
+      if (resp.error !== undefined) throw resp;
       accessToken = resp.access_token;
-      localStorage.setItem("tokenRequested", "true");
+      localStorage.setItem("accessToken", accessToken); // persist token
       loadDataFromDrive();
+      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("logoutBtn").style.display = "inline";
     },
   });
+  gisInited = true;
+  maybeEnableButtons();
 }
 
 // Only request token after tokenClient is ready
