@@ -24,23 +24,43 @@ async function initializeGapiClient() {
   if (accessToken) loadDataFromDrive(); // load immediately if token exists
 }
 
+// Initialize GIS token client
 function gisLoaded() {
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
     callback: (resp) => {
-      if (resp.error !== undefined) throw resp;
+      if (resp.error) throw resp;
       accessToken = resp.access_token;
-      localStorage.setItem("accessToken", accessToken); // persist token
-      loadDataFromDrive();
+      localStorage.setItem("tokenRequested", "true"); // flag token acquired
       document.getElementById("loginBtn").style.display = "none";
       document.getElementById("logoutBtn").style.display = "inline";
+      loadDataFromDrive();
     },
   });
-  gisInited = true;
-  maybeEnableButtons();
 }
 
+// On page load
+window.onload = function() {
+  // If previously logged in, request a new token silently
+  if (localStorage.getItem("tokenRequested") === "true") {
+    tokenClient.requestAccessToken({ prompt: "" }); // silent token refresh
+  } else {
+    document.getElementById("loginBtn").style.display = "inline";
+  }
+
+  document.getElementById("loginBtn").onclick = () => {
+    tokenClient.requestAccessToken({ prompt: "consent" }); // first time login
+  };
+  document.getElementById("logoutBtn").onclick = () => {
+    google.accounts.oauth2.revoke(accessToken, () => {
+      accessToken = null;
+      localStorage.removeItem("tokenRequested");
+      document.getElementById("loginBtn").style.display = "inline";
+      document.getElementById("logoutBtn").style.display = "none";
+    });
+  };
+};
 function maybeEnableButtons() {
   if (gapiInited && gisInited) {
     document.getElementById("loginBtn").onclick = () => {
