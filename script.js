@@ -2,10 +2,14 @@ let gapiInited = false;
 let gisInited = false;
 let tokenClient;
 let accessToken = null;
+
 const CLIENT_ID = "4870239215-m0sg6fkgnl7dd925l22efedcq9lfds8h.apps.googleusercontent.com";
 const API_KEY = "AIzaSyCDg9_fXdnhP31DGwceBdQkWtTIrtTR_OQ";
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
 const FOLDER_ID = "19ogsV3AT99gzwNfUiDDvYsMudrQ31CdZ";
+
+// Only these users are allowed
+const ALLOWED_USERS = ["youremail@gmail.com"];
 
 let entries = []; // local cache
 
@@ -13,6 +17,7 @@ let entries = []; // local cache
 function gapiLoaded() {
   gapi.load("client", initializeGapiClient);
 }
+
 async function initializeGapiClient() {
   await gapi.client.init({
     apiKey: API_KEY,
@@ -29,7 +34,10 @@ function gisLoaded() {
     callback: (resp) => {
       if (resp.error !== undefined) throw resp;
       accessToken = resp.access_token;
+      localStorage.setItem("drive_token", accessToken);
       loadDataFromDrive();
+      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("logoutBtn").style.display = "inline";
     },
   });
   gisInited = true;
@@ -40,11 +48,10 @@ function maybeEnableButtons() {
   if (gapiInited && gisInited) {
     document.getElementById("loginBtn").onclick = () => {
       tokenClient.requestAccessToken({ prompt: "consent" });
-      document.getElementById("loginBtn").style.display = "none";
-      document.getElementById("logoutBtn").style.display = "inline";
     };
     document.getElementById("logoutBtn").onclick = () => {
       google.accounts.oauth2.revoke(accessToken, () => {
+        localStorage.removeItem("drive_token");
         entries = [];
         renderTable();
         document.getElementById("loginBtn").style.display = "inline";
@@ -91,6 +98,7 @@ async function saveToDrive() {
 }
 
 async function loadDataFromDrive() {
+  if (!accessToken) return;
   let fileId = await findOrCreateFile();
   let res = await gapi.client.drive.files.get({
     fileId: fileId,
@@ -153,3 +161,22 @@ function exportToExcel() {
   XLSX.utils.book_append_sheet(wb, ws, "Entries");
   XLSX.writeFile(wb, "expenses.xlsx");
 }
+
+// ---- AUTO LOGIN ON REFRESH + USER CHECK ----
+window.onload = () => {
+  const token = localStorage.getItem("drive_token");
+  if (token) {
+    accessToken = token;
+    // Decode token to check email (optional)
+    const decoded = jwt_decode(localStorage.getItem("user_token") || "");
+    if (!ALLOWED_USERS.includes(decoded?.email)) {
+      alert("Access denied!");
+      localStorage.removeItem("drive_token");
+      localStorage.removeItem("user_token");
+      return;
+    }
+    loadDataFromDrive();
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "inline";
+  }
+};
