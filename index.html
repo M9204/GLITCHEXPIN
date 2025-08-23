@@ -91,6 +91,39 @@
 <!-- Then Google APIs that will call them -->
 <script src="https://apis.google.com/js/api.js" onload="gapiLoaded()" async defer></script>
 <script src="https://accounts.google.com/gsi/client" onload="gisLoaded()" async defer></script>
+<script>
+  function handleCredentialResponse(response) {
+    const data = jwt_decode(response.credential); // decode ID token
+    console.log("Signed in as:", data.email);
+
+    // ✅ Save user info in localStorage
+    localStorage.setItem("user", JSON.stringify(data));
+
+    showApp(data);
+  }
+
+  window.onload = function () {
+    google.accounts.id.initialize({
+      client_id: "YOUR_CLIENT_ID.apps.googleusercontent.com",
+      callback: handleCredentialResponse,
+      auto_select: true   // ✅ silently re-selects last signed-in account
+    });
+
+    // If already logged in, reload user
+    const user = localStorage.getItem("user");
+    if (user) {
+      showApp(JSON.parse(user));
+    } else {
+      google.accounts.id.prompt(); // shows login button
+    }
+  };
+
+  function showApp(user) {
+    document.getElementById("app").style.display = "block";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("userEmail").innerText = user.email;
+  }
+</script>
 
 </body>
 </html>
