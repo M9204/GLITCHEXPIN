@@ -4,11 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Expense and Income Tracker</title>
-<link rel="stylesheet" href="style.css">
-
-<!-- Google APIs -->
-<script src="https://apis.google.com/js/api.js" onload="gapiLoaded()" async defer></script>
-<script src="https://accounts.google.com/gsi/client" onload="gisLoaded()" async defer></script>
+<link rel="stylesheet" href="./public/style.css">
 
 <!-- XLSX -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
@@ -89,7 +85,12 @@
   </div>
 </div>
 
-<!-- App -->
+<!-- App logic first (defines gapiLoaded & gisLoaded) -->
 <script src="script.js"></script>
+
+<!-- Then Google APIs that will call them -->
+<script src="https://apis.google.com/js/api.js" onload="gapiLoaded()" async defer></script>
+<script src="https://accounts.google.com/gsi/client" onload="gisLoaded()" async defer></script>
+
 </body>
 </html>
